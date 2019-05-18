@@ -61,20 +61,33 @@
           </ul>
          </div>
       </nav>
-      <h2>Linked Lists</h2>
+      <h2>Trees</h2>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        You've probably heard of arrays, or lists if you use Python. Well a linked list is
-        similar to these data structures, except the data within a Linked List is not stored
-        contiguously in memory. This is done by using pointers.
+        A tree is actually a type of <a href="#">Graph</a>, with a few distinct properties. In computer science,
+        every tree contains a root node. This root node may contain 0 or more children, and each child may contain
+        0 or more children of its own. A tree also does not contain any cycles. This means there is no path from any
+        node that leads back to itself. A leaf is a node that does not have any children.
       </h5>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        There are two implementations of Linked Lists: doubley-linked and singley-linked. In a doubley-linked
-        list, each node has a pointer to its next and previous nodes. In a singley-linked list, each node only
-        has a pointer to its next node. This means you can traverse from to 
-        tail for both, but can only traverse from tail to head for a doubley-linked list.
+        A binary tree is a tree where each node has no more than two children. This is probably the type of tree most
+        computer science students are familiar with. However, a tree can have any number of children per node &mdash;
+        10, 100, 1000 &mdash; it doesn't matter. As long as it meets the criteria described above, it is still a tree.
+        A subset of binary trees are binary search trees. Binary search trees are binary trees such that each left 
+        descendant is less than its ancestor and each right descendant is greater than its ancestor.
       </h5>
       <br>
+      <br>
+      <div class="center">
+        <img class="center reponsive-img" src="./../../img/binary_search_tree.jpg" 
+             style="border: 1px solid grey; border-radius: 10px;" alt="binary trees">
+        <h6>A Binary Search Tree</h6>
+      </div>
+      <br>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        
+      </h5>
       <h3>Implementation</h3>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
@@ -104,34 +117,38 @@
         <div class="col s6">
           <div class="col-content">
             <h5>
-              <pre><code class="language-cpp">
+              <pre>
+                <code class="language-cpp">
 class Node {
   public:
     Node* next;
     int data; 
 }
-class SinglelyLinkedList {
+class LinkedList {
   public:
     Node* head;
 };
-                </code></pre>
+                </code>
+              </pre>
             </h5>
           </div>
         </div>
         <div class="col s6">
           <div class="col-content">
             <h5>
-              <pre><code class="language-py">
+              <pre>
+                <code class="language-py">
 class Node:
   def __init__(self, data):
     self.data = data
     self.next = None
 
-class SinglelyLinkedList:
+class LinkedList:
   def __init__(self, head):
     self.head = head
 
-                </code></pre>
+                </code>
+              </pre>
             </h5>
           </div>
         </div>
