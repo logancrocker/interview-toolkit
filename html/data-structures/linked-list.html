@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<head>
+  <title>
+    Interview Toolkit
+  </title>
+  <!-- Google Icon Font -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- materialize.css -->
+  <link type="text/css" rel="stylesheet" href="./../../css/materialize.min.css"  media="screen,projection"/>
+  <!-- syntax highlighting -->
+  <link type="text/css" rel="stylesheet" href="./../../css/prism.css">
+</head>
+<body class="grey lighten-5">
+  <div class="container">
+    <!-- Data structures dropdown -->
+    <ul id="data-structures-dropdown" class="dropdown-content">
+        <li><a class="blue-text text-darken-5" href="#">Linked Lists</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Trees</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Tries</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Graphs</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Stacks</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Queues</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Vectors</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Trees</a></li>
+      </ul>
+      <!-- Algorithms dropdown -->
+      <ul id="algorithms-dropdown" class="dropdown-content">
+        <li><a class="blue-text text-darken-5" href="#">BFS</a></li>
+        <li><a class="blue-text text-darken-5" href="#">DFS</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Binary Search</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Merge Sort</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Quick Sort</a></li>
+      </ul>
+      <!-- Concepts dropdown -->
+      <ul id="concepts-dropdown" class="dropdown-content ">
+        <li><a class="blue-text text-darken-5" href="#">Bit Manipulation</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Memory</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Recursion</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Dynamic Programming</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Big O</a></li>
+      </ul>
+      <!-- Navigation bar -->
+      <nav class="blue lighten-2">
+        <div class="nav-wrapper">
+          <a href="./../main/index.html" class="brand-logo" style="margin-left: 15px; font-size: 28px;">
+            Welcome to the Interview Toolkit.
+          </a>
+          <ul class="right hide-on-med-and-down">
+            <li class="active">
+              <a class="dropdown-trigger" data-target="data-structures-dropdown" href="data-structures.html"
+                 style="font-size: 24px;">Data Structures</a>
+            </li>
+            <li>
+              <a class="dropdown-trigger" data-target="algorithms-dropdown" href="#"
+                 style="font-size: 24px;">Algorithms</a>
+            </li>
+            <li>
+              <a class="dropdown-trigger"  data-target="concepts-dropdown" href="#"
+                 style="font-size: 24px;">Concepts</a>
+            </li>
+          </ul>
+         </div>
+      </nav>
+      <h2>Linked Lists</h2>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        You've probably heard of arrays, or lists if you use Python. Well a linked list is
+        similar to these data structures, except the data within a Linked List is not stored
+        contiguously in memory. This is done by using pointers.
+      </h5>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        There are two implementations of Linked Lists: doubley-linked and singley-linked. In a doubley-linked
+        list, each node has a pointer to its next and previous nodes. In a singley-linked list, each node only
+        has a pointer to its next node. This means you can traverse from to 
+        tail for both, but can only traverse from tail to head for a doubley-linked list.
+      </h5>
+      <br>
+      <h3>Implementation</h3>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        A linked list is implemented with a <code class="black-text">Node</code> class, which contains a pointer to 
+        <code class="black-text">next</code> and a variable containing that node's <code class="black-text">data</code>.
+        If you are implementing a doubley-linked list, there will also be a pointer to <code class="black-text">prev</code>.
+      </h5>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        You can also create a <code class="black-text">LinkedList</code> wrapper class which only contains the head 
+        <code class="black-text">Node</code>.
+      </h5>
+      <br>
+      <h3>Pros</h3>
+      <ol class="grey-text text-darken-1" style="line-height: 175%">
+        <h5><li>Dynamic size</li></h5>
+        <h5><li>Fast insert/delete</li></h5>
+      </ol>
+      <h3>Cons</h3>
+      <ol class="grey-text text-darken-1" style="line-height: 175%">
+        <h5><li>Must traverse the list to access a desired item</li></h5>
+        <h5><li>Extra memory required for each node since you are using pointers</li></h5>
+      </ol>
+      <br>
+      <h3>Examples</h4>
+      <div class="row">
+        <div class="col s6">
+          <div class="col-content">
+            <h5>
+              <pre>
+                <code class="language-cpp">
+class Node {
+  public:
+    Node* next;
+    int data; 
+}
+class LinkedList {
+  public:
+    Node* head;
+};
+                </code>
+              </pre>
+            </h5>
+          </div>
+        </div>
+        <div class="col s6">
+          <div class="col-content">
+            <h5>
+              <pre>
+                <code class="language-py">
+class Node:
+  def __init__(self, data):
+    self.data = data
+    self.next = None
+
+class LinkedList:
+  def __init__(self, head):
+    self.head = head
+
+                </code>
+              </pre>
+            </h5>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <!-- JS imports -->
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <!-- materialize.js -->
+  <script type="text/javascript" src="./../../js/materialize.min.js"></script>
+  <!-- nav.js -->
+  <script src="./../../js/nav.js"></script>
+  <!-- syntax highlighting -->
+  <script src="./../../js/prism.js"></script>
+</body>
