@@ -85,6 +85,15 @@
         is needed. A common use case would be implementing an autocomplete function.
       </h5>
       <br>
+      <br>
+      <div class="center">
+          <img class="center reponsive-img" src="./../../img/trie.PNG" 
+          style="border: 1px solid grey; border-radius: 10px;" alt="binary trees">
+          <h6>A Trie with terminating nodes</h6>
+          <h6>"Cracking the Coding Interview", p. 105</h6>
+      </div>
+      <br>
+      <br>
       <h3>Implementation</h3>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
@@ -117,9 +126,9 @@ class Node {
               <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
 # Python
 class Node:
-  def __init__(self, key, term):
+  def __init__(self, key, flag):
     self.key = key
-    self.terminates = term
+    self.terminates = flag
     self.children = {}
               </code></pre>
             </h5>
