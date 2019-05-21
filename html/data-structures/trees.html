@@ -14,33 +14,34 @@
   <div class="container">
     <!-- Data structures dropdown -->
     <ul id="data-structures-dropdown" class="dropdown-content">
-        <li><a class="blue-text text-darken-5" href="./linked-list.html">Linked Lists</a></li>
-        <li><a class="blue-text text-darken-5" href="./trees.html">Trees</a></li>
-        <li><a class="blue-text text-darken-5" href="#">Tries</a></li>
-        <li><a class="blue-text text-darken-5" href="#">Graphs</a></li>
-        <li><a class="blue-text text-darken-5" href="#">Stacks</a></li>
-        <li><a class="blue-text text-darken-5" href="#">Queues</a></li>
-        <li><a class="blue-text text-darken-5" href="#">Vectors</a></li>
-        <li><a class="blue-text text-darken-5" href="#">Trees</a></li>
-      </ul>
-      <!-- Algorithms dropdown -->
-      <ul id="algorithms-dropdown" class="dropdown-content">
+        <li><a class="blue-text text-darken-5" href="./../data-structures/linked-list.html">Linked Lists</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/trees.html">Trees</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/tries.html">Tries</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/graphs.html">Graphs</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/stacks.html">Stacks</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/queues.html">Queues</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/heaps.html">Heaps</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/vectors.html">Vectors</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/hash-tables.html">Hash tables</a></li>
+    </ul>
+    <!-- Algorithms dropdown -->
+    <ul id="algorithms-dropdown" class="dropdown-content">
         <li><a class="blue-text text-darken-5" href="#">BFS</a></li>
         <li><a class="blue-text text-darken-5" href="#">DFS</a></li>
         <li><a class="blue-text text-darken-5" href="#">Binary Search</a></li>
         <li><a class="blue-text text-darken-5" href="#">Merge Sort</a></li>
         <li><a class="blue-text text-darken-5" href="#">Quick Sort</a></li>
-      </ul>
-      <!-- Concepts dropdown -->
-      <ul id="concepts-dropdown" class="dropdown-content ">
+    </ul>
+    <!-- Concepts dropdown -->
+    <ul id="concepts-dropdown" class="dropdown-content ">
         <li><a class="blue-text text-darken-5" href="#">Bit Manipulation</a></li>
         <li><a class="blue-text text-darken-5" href="#">Memory</a></li>
         <li><a class="blue-text text-darken-5" href="#">Recursion</a></li>
         <li><a class="blue-text text-darken-5" href="#">Dynamic Programming</a></li>
         <li><a class="blue-text text-darken-5" href="#">Big O</a></li>
-      </ul>
-      <!-- Navigation bar -->
-      <nav class="blue lighten-2">
+    </ul>
+    <!-- Navigation bar -->
+    <nav class="blue lighten-2">
         <div class="nav-wrapper">
           <a href="./../main/index.html" class="brand-logo" style="margin-left: 15px; font-size: 28px;">
             Welcome to the Interview Toolkit.
@@ -60,11 +61,11 @@
             </li>
           </ul>
          </div>
-      </nav>
+    </nav>
       <h2>Trees</h2>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        A tree is actually a type of <a href="#">Graph</a>, with a few distinct properties. In computer science,
+        A tree is actually a type of <a href="./graphs.html">Graph</a>, with a few distinct properties. In computer science,
         every tree contains a root node. This root node may contain 0 or more children, and each child may contain
         0 or more children of its own. A tree also does not contain any cycles. This means there is no path from any
         node that leads back to itself. A leaf is a node that does not have any children.
@@ -91,42 +92,35 @@
       <h3>Implementation</h3>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        A linked list is implemented with a <code class="black-text">Node</code> class, which contains a pointer to 
-        <code class="black-text">next</code> and a variable containing that node's <code class="black-text">data</code>.
-        If you are implementing a doubley-linked list, there will also be a pointer to <code class="black-text">prev</code>.
+        A tree is implemented with a <code class="black-text">Node</code> class, which contains a list or array of its children. 
+        In the case of binary tree, typically you will just have a pointer to its <code class="black-text">left</code> and 
+        <code class="black-text">right</code> nodes.
       </h5>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        You can also create a <code class="black-text">LinkedList</code> wrapper class which only contains the head 
-        <code class="black-text">Node</code>.
+        You can also create a <code class="black-text">Tree</code> wrapper class which only contains the 
+        <code class="black-text">root Node</code>.
       </h5>
       <br>
-      <h3>Pros</h3>
-      <ol class="grey-text text-darken-1" style="line-height: 175%">
-        <h5><li>Dynamic size</li></h5>
-        <h5><li>Fast insert/delete</li></h5>
-      </ol>
-      <h3>Cons</h3>
-      <ol class="grey-text text-darken-1" style="line-height: 175%">
-        <h5><li>Must traverse the list to access a desired item</li></h5>
-        <h5><li>Extra memory required for each node since you are using pointers</li></h5>
-      </ol>
-      <br>
       <h3>Examples</h4>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">Below is an implementation of a Binary tree.</h5>
       <br>
       <div class="row">
         <div class="col s6">
           <div class="col-content">
             <h5>
-              <pre>
+              <pre style="border: 1px solid grey; border-radius: 10px;">
                 <code class="language-cpp">
+// C++
 class Node {
   public:
-    Node* next;
+    Node* left;
+    Node* right;
     int data; 
 }
-class LinkedList {
+class Tree {
   public:
-    Node* head;
+    Node* root;
 };
                 </code>
               </pre>
@@ -136,16 +130,18 @@ class LinkedList {
         <div class="col s6">
           <div class="col-content">
             <h5>
-              <pre>
+              <pre style="border: 1px solid grey; border-radius: 10px;">
                 <code class="language-py">
+# Python
 class Node:
   def __init__(self, data):
     self.data = data
-    self.next = None
+    self.left = None
+    self.right = None
 
-class LinkedList:
-  def __init__(self, head):
-    self.head = head
+class Tree:
+  def __init__(self, root):
+    self.root = root
 
                 </code>
               </pre>
@@ -153,6 +149,145 @@ class LinkedList:
           </div>
         </div>
       </div>
+      <br>
+      <h3>Binary Tree traversal</h3>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        Often times you will be asked to traverse a binary tree. This means to visit each node
+        in a particular order. Often times by "visit" we mean print the data at a node. There are three types of
+        binary tree traversals: In-Order, Post-Order, and Pre-Order. We will go through each of them.
+        <ol>
+          <li class="black-text">
+            In-Order
+            <br>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">
+              Visit the left subtree, then the current node, then the right subtree.
+            </h5>
+            </code></pre>
+          </li>
+          <div class="row">
+            <div class="col s6">
+              <div class="col-content">
+                <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
+// C++
+void inOrder(Node* root) {
+  if (root != null) {
+    inOrder(root->left);
+    visit(root);
+    inOrder(root->right);
+  }
+}
+                </code></pre>
+              </div>
+            </div>
+            <div class="col s6">
+              <div class="col-content">
+                <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
+# Python
+def inOrder(root):
+  if root:
+    inOrder(root.left)
+    visit(root)
+    inOrder(root.right)
+
+
+                </code></pre>
+              </div>
+            </div>
+          </div>
+          <li class="black-text">
+            Pre-Order
+            <br>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">
+              Visit the current node before visiting the subtrees. For binary trees it would current node,
+              then left subtree, then right subtree.
+            </h5>
+          </li>
+          <div class="row">
+            <div class="col s6">
+              <div class="col-content">
+                <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
+// C++
+void preOrder(Node* root) {
+  if (root != null) {
+    visit(root);
+    preOrder(root->left);
+    preOrder(root->right);
+  }
+}
+                </code></pre>
+              </div>
+            </div>
+            <div class="col s6">
+              <div class="col-content">
+                <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
+# Python
+def preOrder(root):
+  if root:
+    visit(root)
+    preOrder(root.left)
+    preOrder(root.right)
+
+      
+                </code></pre>
+              </div>
+            </div>
+          </div>
+          <li class="black-text">
+            Post-Order
+            <br>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">
+              Visit the current node after visiting the subtrees. For binary trees it would be left subtree, 
+              then right subtree, then current node.
+            </h5>
+          </li>
+          <div class="row">
+            <div class="col s6">
+              <div class="col-content">
+                <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
+// C++
+void postOrder(Node* root) {
+  if (root != null) {
+    postOrder(root->left);
+    postOrder(root->right);
+    visit(root);
+  }
+}
+                </code></pre>
+              </div>
+            </div>
+            <div class="col s6">
+              <div class="col-content">
+                <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
+# Python
+def postOrder(root):
+  if root:
+    postOrder(root.left)
+    postOrder(root.right)
+    visit(root)
+  
+        
+                </code></pre>
+              </div>
+            </div>
+          </div>
+        </ol>
+      </h5>
+    <!-- Footer -->
+    <h6 class="center grey-text text-darken-1">Developed by Logan Crocker</h6>
+    <div class="row">
+      <div class=" center col s1 offset-s5">
+        <a href="https://github.com/logancrocker/">Github</a>
+      </div>
+      <div class="col s1">
+        <a href="https://logancrocker.github.io/">Portfolio</a>
+      </div>
+    </div>
+    <div class="center">
+      <h6 class="grey-text text-darken-1">Many thanks and credit to Gayle Laakmann McDowell</h6>
+      <a class="center" href="http://www.crackingthecodinginterview.com/">Crack the Coding Interview</a>
+    </div>
+    <br>
   </div>
 
   <!-- JS imports -->

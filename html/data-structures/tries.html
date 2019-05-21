@@ -62,35 +62,39 @@
           </ul>
          </div>
       </nav>
-      <h2>Linked Lists</h2>
+      <h2>Tries</h2>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        You've probably heard of arrays, or lists if you use Python. Well a linked list is
-        similar to these data structures, except the data within a Linked List is not stored
-        contiguously in memory. This is done by using pointers.
+        A trie is a type of <a href="./trees.html">Tree</a>, which is a type of 
+        <a href="./graphs.html">Graph</a>. You may sometimes see them be referred to as 
+        prefix trees. Tries were invented as a solution to a very specific problem, which 
+        was storing and retrieving strings.
+        <blockquote style="border-left-color: #64b5f6; margin-left: 5%; margin-right: 5%;">
+          A trie is a variant of an n-ary tree in which characters are stored at each node.
+          Each path down the tree may represent a word.
+        </blockquote>
+        <h6 class="grey-text text-darken-1 center">McDowell, "Cracking the Coding Interview"</h6>
       </h5>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        There are two implementations of Linked Lists: doubley-linked and singley-linked. In a doubley-linked
-        list, each node has a pointer to its next and previous nodes. In a singley-linked list, each node only
-        has a pointer to its next node. This means you can traverse from to 
-        tail for both, but can only traverse from tail to head for a doubley-linked list.
+        Typically there will be a way to indicate the end of a word. These can be implemented as a special child 
+        such as <code class="black-text">TerminatingTrieNode</code> or by storing a boolean flag in
+        the parent, such as <code class="black-text">terminates</code> (McDowell, "Cracking the Coding Interview").
+      </h5>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        Tries are a very common data structure to be used whenever some type of word validation
+        is needed. A common use case would be implementing an autocomplete function.
       </h5>
       <br>
       <h3>Implementation</h3>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        A linked list is implemented with a <code class="black-text">Node</code> class, which contains a pointer to 
-        <code class="black-text">next</code> and a variable containing that node's <code class="black-text">data</code>.
-        If you are implementing a doubley-linked list, there will also be a pointer to <code class="black-text">prev</code>.
-      </h5>
-      <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        You can also create a <code class="black-text">LinkedList</code> wrapper class which only contains the head 
-        <code class="black-text">Node</code>.
+        A trie is implemented in a very similar way to any other tree, but with a slight twist. Each <code class="black-text">Node</code>
+        contains a <a href="./hash-tables.html">Hash table</a> of its children that maps from a key (character) to its corresponding 
+        <code class="black-text">Node</code>. The simplest way to indicate when a word terminates would be to use a boolean 
+        <code class="black-text">terminates</code> flag set to true for any <code class="black-text">Node</code> that completes a word.
       </h5>
       <br>
       <h3>Examples</h4>
-      <br>
-      <h5 class="grey-text text-darken-1">Below is an implementation of a singley linked list.</h5>
       <br>
       <div class="row">
         <div class="col s6">
@@ -99,15 +103,11 @@
               <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
 // C++
 class Node {
-  public:
-    Node* next;
-    int data; 
+  char key;
+  HashMap&lt;char, Node&gt; children;
+  bool terminates;
 }
-class LinkedList {
-  public:
-    Node* head;
-};
-                </code></pre>
+              </code></pre>
             </h5>
           </div>
         </div>
@@ -117,19 +117,16 @@ class LinkedList {
               <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
 # Python
 class Node:
-  def __init__(self, data):
-    self.data = data
-    self.next = None
-
-class LinkedList:
-  def __init__(self, head):
-    self.head = head
-
-                </code></pre>
+  def __init__(self, key, term):
+    self.key = key
+    self.terminates = term
+    self.children = {}
+              </code></pre>
             </h5>
           </div>
         </div>
       </div>
+      <br>
     <!-- Footer -->
     <h6 class="center grey-text text-darken-1">Developed by Logan Crocker</h6>
     <div class="row">
