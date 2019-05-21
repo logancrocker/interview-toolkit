@@ -65,21 +65,113 @@
       <h2>Graphs</h2>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        graphs
+        A graph is a collection of nodes connected by edges. A graph can be either <b>directed</b> or
+        <b>undirected</b>. In a directed graph, you can only traverse an edge in a certain direction.
+        In an undirected graph, you can traverse an edge in either direction. A graph with edges between
+        every pair of vertices is called <b>connected</b>. A graph without cycles is known as <b>acyclic</b>.
       </h5>
       <br>
       <h3>Implementation</h3>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        implementation
+        There are two ways to implement a graph. With an <b>adjacency matrix</b> or an <b>adjacency list</b>.
+        <br>
+        <ol>
+          <li class="black-text">
+            Adjacency Matrix
+            <br>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">
+              The graph is stored as an NxN matrix of booleans, where N is the number of nodes. If there is an edge
+              from <code class="black-text">i</code> to <code class="black-text">j</code>, then <code class="black-text">mat[i][j]</code>
+              is <code class="black-text">true</code>. Everywhere else is <code class="black-text">false</code>. This implementation
+              is generally not preferred as you have to iterate through all the nodes to find the neighbors of a node.
+            </h5>
+          </li>
+          <li class="black-text">
+            Adjacency List
+            <br>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">
+              We use a <code class="black-text">Node</code> class, which contains a list of all its children.
+              The graph is then represented with a <code class="black-text">Graph</code> class, which contains a 
+              list of all its nodes. This is necessary because it is not always possible to reach every node from
+              a root node, like with a <a href="./trees.html">tree</a>.
+            </h5>
+          </li>
+        </ol>
       </h5>
       <br>
       <h3>Examples</h4>
       <br>
-      <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        examples
+      <h5 class="black-text">
+        Adjacency List
       </h5>
       <br>
+      <div class="row">
+        <div class="col s6">
+          <div class="col-content">
+            <h5>
+              <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
+// C++
+class Node {
+  char label;
+  Node neighbors[];
+}
+class Graph {
+  Node nodes[];
+}
+              </code></pre>
+            </h5>
+          </div>
+        </div>
+        <div class="col s6">
+          <div class="col-content">
+            <h5>
+              <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
+# Python
+class Node:
+  def __init__(self, label):
+    self.label = label
+    self.neighbors = []
+class Graph:
+  def __init__(self):
+    self.nodes = []
+              </code></pre>
+            </h5>
+          </div>
+        </div>
+      </div>
+      <br>
+      <h5 class="black-text">
+        Adjacency Matrix
+      </h5>
+      <br>
+      <div class="row">
+        <div class="col s6">
+          <div class="col-content">
+            <h5>
+              <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
+// C++
+class Graph {
+  vector&lt;vector&lt;bool&gt; &gt; matrix;
+}
+              </code></pre>
+            </h5>
+          </div>
+        </div>
+        <div class="col s6">
+          <div class="col-content">
+            <h5>
+              <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
+# Python
+class Graph:
+  def __init__(self, numNodes):
+    self.matrix = [[0 for i in range(numNodes)] for i in range(numNodes)]
+              </code></pre>
+            </h5>
+          </div>
+        </div>
+      </div>
+    <br>
     <!-- Footer -->
     <h6 class="center grey-text text-darken-1">Developed by Logan Crocker</h6>
     <div class="row">
