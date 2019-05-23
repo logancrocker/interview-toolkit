@@ -1,1 +1,197 @@
-vectors
+<!DOCTYPE html>
+<head>
+  <title>
+    Interview Toolkit
+  </title>
+  <!-- Google Icon Font -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- materialize.css -->
+  <link type="text/css" rel="stylesheet" href="./../../css/materialize.min.css"  media="screen,projection"/>
+  <!-- syntax highlighting -->
+  <link type="text/css" rel="stylesheet" href="./../../css/prism.css">
+</head>
+<body class="grey lighten-5">
+  <div class="container">
+    <!-- Data structures dropdown -->
+    <ul id="data-structures-dropdown" class="dropdown-content">
+        <li><a class="blue-text text-darken-5" href="./../data-structures/linked-list.html">Linked Lists</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/trees.html">Trees</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/tries.html">Tries</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/graphs.html">Graphs</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/stacks.html">Stacks</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/queues.html">Queues</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/heaps.html">Heaps</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/vectors.html">Vectors</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/hash-tables.html">Hash tables</a></li>
+      </ul>
+      <!-- Algorithms dropdown -->
+      <ul id="algorithms-dropdown" class="dropdown-content">
+        <li><a class="blue-text text-darken-5" href="#">BFS</a></li>
+        <li><a class="blue-text text-darken-5" href="#">DFS</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Binary Search</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Merge Sort</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Quick Sort</a></li>
+      </ul>
+      <!-- Concepts dropdown -->
+      <ul id="concepts-dropdown" class="dropdown-content ">
+        <li><a class="blue-text text-darken-5" href="#">Bit Manipulation</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Memory</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Recursion</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Dynamic Programming</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Big O</a></li>
+      </ul>
+      <!-- Navigation bar -->
+      <nav class="blue lighten-2">
+        <div class="nav-wrapper">
+          <a href="./../main/index.html" class="brand-logo" style="margin-left: 15px; font-size: 28px;">
+            Welcome to the Interview Toolkit.
+          </a>
+          <ul class="right hide-on-med-and-down">
+            <li class="active">
+              <a class="dropdown-trigger" data-target="data-structures-dropdown" href="data-structures.html"
+                 style="font-size: 24px;">Data Structures</a>
+            </li>
+            <li>
+              <a class="dropdown-trigger" data-target="algorithms-dropdown" href="#"
+                 style="font-size: 24px;">Algorithms</a>
+            </li>
+            <li>
+              <a class="dropdown-trigger"  data-target="concepts-dropdown" href="#"
+                 style="font-size: 24px;">Concepts</a>
+            </li>
+          </ul>
+         </div>
+      </nav>
+      <h2>Vectors</h2>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        Vectors are dynamic lists in C++. In Python they are called lists and in Java they are called ArrayLists, but the name doesn't matter.
+        Dynamically resizable lists are an important concept to know. 
+      </h5>
+      <br>
+      <h3>Implementation</h3>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        These types of data structures are implemented with an array, regardless of the language you use. Whenever an item is added that exceeds
+        the size of the array, all the items are copied over to a larger array. In Java the new array is larger by a factor of 2, but this can vary
+        and is up to you when you implement something like this.
+      </h5>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        A <code class="black-text">Vector</code> class can support a myriad of operations, but there are four that are the bare minimum:
+        <ol class="black-text">
+          <li><code>empty()</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">
+              Returns true if the container is empty.
+            </h5>
+          </li>
+          <li><code>size()</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">
+              Returns the size of the container (number of items in the container).
+            </h5>
+          </li>
+          <li><code>push_back(item)</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">
+              Appends an item to the end of the list.
+            </h5>
+          </li>
+          <li><code>at(index)</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">
+              Returns the item at the given index in the underlying array.
+            </h5>
+          </li>
+        </ol>
+      </h5>
+      <br>
+      <h3>Examples</h4>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        Dynamic lists work out of the box for Python, so I've only included an implementation for vectors in C++.
+      </h5>
+      <br>
+      <div class="row">
+        <div class="col s12">
+          <div class="col-content">
+            <h5>
+              <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
+// C++
+#include &lt;iostream&gt;
+
+using namespace std;
+    
+class Vector {
+  private:
+    int* items = new int[5];
+    int capacity = 5;
+    int length = 0;
+    
+  public:
+    bool empty() {
+      return this->length == 0;
+    }
+    
+    int size() {
+      return this->length;
+    }
+    
+    void push_back(int item) {
+      if (this->length < this->capacity) {
+        this->items[this->length] = item;
+        this->length++;
+      }
+      else {
+        int newCapacity = this->capacity * 2;
+        int* newItems = new int[newCapacity];
+        for (int i = 0; i < this->capacity; ++i) {
+          newItems[i] = this->items[i];
+        }
+        newItems[this->length] = item;
+        this->length++;
+        delete[] this->items;
+        this->items = newItems;
+        this->capacity = newCapacity;
+      }
+    }
+    
+    int at(int index) {
+      if (this->length == 0) {
+        cout << "Empty vector!" << endl;
+        return -1;
+      }
+      else {
+        return this->items[index];
+      }
+    }
+};
+              </code></pre>
+            </h5>
+          </div>
+        </div>
+      </div>
+    <br>
+    <!-- Footer -->
+    <h6 class="center grey-text text-darken-1">Developed by Logan Crocker</h6>
+    <div class="row">
+      <div class=" center col s1 offset-s5">
+        <a href="https://github.com/logancrocker/">Github</a>
+      </div>
+      <div class="col s1">
+        <a href="https://logancrocker.github.io/">Portfolio</a>
+      </div>
+    </div>
+    <div class="center">
+      <h6 class="grey-text text-darken-1">Many thanks and credit to Gayle Laakmann McDowell</h6>
+      <a class="center" href="http://www.crackingthecodinginterview.com/">Crack the Coding Interview</a>
+    </div>
+    <br>
+  </div>
+
+  <!-- JS imports -->
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <!-- materialize.js -->
+  <script type="text/javascript" src="./../../js/materialize.min.js"></script>
+  <!-- nav.js -->
+  <script src="./../../js/nav.js"></script>
+  <!-- syntax highlighting -->
+  <script src="./../../js/prism.js"></script>
+</body>
