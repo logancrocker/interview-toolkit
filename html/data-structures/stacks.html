@@ -1,1 +1,232 @@
-stacks
+<!DOCTYPE html>
+<head>
+  <title>
+    Interview Toolkit
+  </title>
+  <!-- Google Icon Font -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- materialize.css -->
+  <link type="text/css" rel="stylesheet" href="./../../css/materialize.min.css"  media="screen,projection"/>
+  <!-- syntax highlighting -->
+  <link type="text/css" rel="stylesheet" href="./../../css/prism.css">
+</head>
+<body class="grey lighten-5">
+  <div class="container">
+    <!-- Data structures dropdown -->
+    <ul id="data-structures-dropdown" class="dropdown-content">
+        <li><a class="blue-text text-darken-5" href="./../data-structures/linked-list.html">Linked Lists</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/trees.html">Trees</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/tries.html">Tries</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/graphs.html">Graphs</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/stacks.html">Stacks</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/queues.html">Queues</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/heaps.html">Heaps</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/vectors.html">Vectors</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/hash-tables.html">Hash tables</a></li>
+      </ul>
+      <!-- Algorithms dropdown -->
+      <ul id="algorithms-dropdown" class="dropdown-content">
+        <li><a class="blue-text text-darken-5" href="#">BFS</a></li>
+        <li><a class="blue-text text-darken-5" href="#">DFS</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Binary Search</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Merge Sort</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Quick Sort</a></li>
+      </ul>
+      <!-- Concepts dropdown -->
+      <ul id="concepts-dropdown" class="dropdown-content ">
+        <li><a class="blue-text text-darken-5" href="#">Bit Manipulation</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Memory</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Recursion</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Dynamic Programming</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Big O</a></li>
+      </ul>
+      <!-- Navigation bar -->
+      <nav class="blue lighten-2">
+        <div class="nav-wrapper">
+          <a href="./../main/index.html" class="brand-logo" style="margin-left: 15px; font-size: 28px;">
+            Welcome to the Interview Toolkit.
+          </a>
+          <ul class="right hide-on-med-and-down">
+            <li class="active">
+              <a class="dropdown-trigger" data-target="data-structures-dropdown" href="data-structures.html"
+                 style="font-size: 24px;">Data Structures</a>
+            </li>
+            <li>
+              <a class="dropdown-trigger" data-target="algorithms-dropdown" href="#"
+                 style="font-size: 24px;">Algorithms</a>
+            </li>
+            <li>
+              <a class="dropdown-trigger"  data-target="concepts-dropdown" href="#"
+                 style="font-size: 24px;">Concepts</a>
+            </li>
+          </ul>
+         </div>
+      </nav>
+      <h2>Stacks</h2>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        A stack is another type of linear data structure that is extremely common. Stacks follow one simple rule: Last in, First out (LIFO). This
+        means that the last item to be inserted into a stack is the first item to be retrieved. Just like stacks of items in real life, you must 
+        remove the items on top to get to the bottom items.
+      </h5>
+      <br>
+      <h3>Implementation</h3>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        A stack can be implemented with any list-like data structure, such as an array or linked list. The key is that you only add or remove items
+        from one end, and always keep track of the <code class="black-text">top</code>.
+      </h5>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        A <code class="black-text">Stack</code> class must support four operations:
+        <ol class="black-text">
+          <li><code>pop()</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">Remove the top item from the stack.</h5>
+          </li>
+          <li><code>push(item)</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">Add an item to the top of the stack.</h5>
+          </li>
+          <li><code>peek()</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">Return the top of the stack.</h5>
+          </li>
+          <li><code>isEmpty()</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">Return <code class="black-text">true</code> if the stack is empty.</h5>
+          </li>
+        </ol>
+      </h5>
+      <br>
+      <h3>Examples</h4>
+      <br>
+      <div class="row">
+        <div class="col s6">
+          <div class="col-content">
+            <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
+// C++
+#include &lt;iostream&gt;
+
+using namespace std;
+    
+class Stack {
+  private:
+    int stack[100];
+    int size = 0;
+    int top = this->stack[size];
+    
+  public:
+    void pop() {
+      if (this->size >= 1) {
+        this->top = this->stack[size - 2];
+        this->size -= 1;
+      }
+      else {
+        cout << "Empty stack!" << endl;
+      }
+    }
+    
+    void push(int item) {
+      if (this->size < 100) {
+        this->stack[size] = item;
+        this->size += 1;
+        this->top = item;
+      }
+      else {
+        cout << "Stack overflow!" << endl;
+      }
+    }
+    
+    bool isEmpty() {
+      return this->size == 0;
+    }
+    
+    int peek() {
+      if (!this->isEmpty()) {
+        return this->top;
+      }
+      else {
+        return -1;
+      }
+    }
+};
+            </code></pre>
+          </div>
+        </div>
+        <div class="col s6">
+          <div class="col-content">
+            <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
+# Python
+class Stack:
+
+  def __init__(self):
+    self.stack = []
+              
+  def push(self, item):
+    self.stack.append(item)
+              
+  def pop(self):
+    if (not self.isEmpty()):
+      self.stack.pop()
+    else:
+      print("Empty stack!")
+              
+  def peek(self):
+    if (not self.isEmpty()):
+      return self.stack[len(self.stack) - 1]
+    else:
+      print("Empty stack!")
+              
+  def isEmpty(self):
+    return len(self.stack) == 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </code></pre>
+          </div>
+        </div>
+      </div>
+    <br>
+    <!-- Footer -->
+    <h6 class="center grey-text text-darken-1">Developed by Logan Crocker</h6>
+    <div class="row">
+      <div class=" center col s1 offset-s5">
+        <a href="https://github.com/logancrocker/">Github</a>
+      </div>
+      <div class="col s1">
+        <a href="https://logancrocker.github.io/">Portfolio</a>
+      </div>
+    </div>
+    <div class="center">
+      <h6 class="grey-text text-darken-1">Many thanks and credit to Gayle Laakmann McDowell</h6>
+      <a class="center" href="http://www.crackingthecodinginterview.com/">Crack the Coding Interview</a>
+    </div>
+    <br>
+  </div>
+
+  <!-- JS imports -->
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <!-- materialize.js -->
+  <script type="text/javascript" src="./../../js/materialize.min.js"></script>
+  <!-- nav.js -->
+  <script src="./../../js/nav.js"></script>
+  <!-- syntax highlighting -->
+  <script src="./../../js/prism.js"></script>
+</body>

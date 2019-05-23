@@ -1,1 +1,142 @@
-heaps
+<!DOCTYPE html>
+<head>
+  <title>
+    Interview Toolkit
+  </title>
+  <!-- Google Icon Font -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- materialize.css -->
+  <link type="text/css" rel="stylesheet" href="./../../css/materialize.min.css"  media="screen,projection"/>
+  <!-- syntax highlighting -->
+  <link type="text/css" rel="stylesheet" href="./../../css/prism.css">
+</head>
+<body class="grey lighten-5">
+  <div class="container">
+    <!-- Data structures dropdown -->
+    <ul id="data-structures-dropdown" class="dropdown-content">
+        <li><a class="blue-text text-darken-5" href="./../data-structures/linked-list.html">Linked Lists</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/trees.html">Trees</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/tries.html">Tries</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/graphs.html">Graphs</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/stacks.html">Stacks</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/queues.html">Queues</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/heaps.html">Heaps</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/vectors.html">Vectors</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/hash-tables.html">Hash tables</a></li>
+      </ul>
+      <!-- Algorithms dropdown -->
+      <ul id="algorithms-dropdown" class="dropdown-content">
+        <li><a class="blue-text text-darken-5" href="#">BFS</a></li>
+        <li><a class="blue-text text-darken-5" href="#">DFS</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Binary Search</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Merge Sort</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Quick Sort</a></li>
+      </ul>
+      <!-- Concepts dropdown -->
+      <ul id="concepts-dropdown" class="dropdown-content ">
+        <li><a class="blue-text text-darken-5" href="#">Bit Manipulation</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Memory</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Recursion</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Dynamic Programming</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Big O</a></li>
+      </ul>
+      <!-- Navigation bar -->
+      <nav class="blue lighten-2">
+        <div class="nav-wrapper">
+          <a href="./../main/index.html" class="brand-logo" style="margin-left: 15px; font-size: 28px;">
+            Welcome to the Interview Toolkit.
+          </a>
+          <ul class="right hide-on-med-and-down">
+            <li class="active">
+              <a class="dropdown-trigger" data-target="data-structures-dropdown" href="data-structures.html"
+                 style="font-size: 24px;">Data Structures</a>
+            </li>
+            <li>
+              <a class="dropdown-trigger" data-target="algorithms-dropdown" href="#"
+                 style="font-size: 24px;">Algorithms</a>
+            </li>
+            <li>
+              <a class="dropdown-trigger"  data-target="concepts-dropdown" href="#"
+                 style="font-size: 24px;">Concepts</a>
+            </li>
+          </ul>
+         </div>
+      </nav>
+      <h2>Heaps</h2>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        A heap is essentially a type of complete binary <a href="./trees.html">Tree</a>. In a <b>min-heap</b>, each node is smaller than
+        its children. Likewise, in a <b>max-heap</b>, each node is larger than its children. This means the root node is always the max or min item.
+        Heaps are useful for when you need a way to quickly retrieve or delete the max or min item in a collection. Heaps are a common way of 
+        implementing a priority queue, and sometimes priority queues are called heaps.
+      </h5>
+      <br>
+      <br>
+      <div class="center">
+        <img class="responsive-img" style="border: 1px solid grey; border-radius: 10px;"" 
+             src="./../../img/heap.bmp" alt="heap">
+        <h6>
+          Min heap (left) and max heap (right)
+        </h6>
+      </div>
+      <br>
+      <h3>Implementation</h3>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        A heap is implemented as a binary tree, with functions unique to a heap.
+      </h5>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        A <code class="black-text">Heap</code> class must support two key operations:
+        <ol class="black-text">
+          <li><code>insert(item)</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">
+              This function inserts an item into the heap. In order to maintain completeness, we start at the bottom level
+              and find the first available spot from left to right. Then, while the new item's parent is greater/less than
+              (this depends on the type of heap) the new item, we swap the two. We continue doing this, gradually moving the new item
+              up the tree until we find the right spot for it.
+            </h5>
+          </li>
+          <li><code>retrieve_min()</code> (<code>retrieve_max()</code> for a max-heap)
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">
+              This function simply grabs the max or min item in the heap, which is always the root. To remove it, we first remove the root
+              and replace it with the bottom-most item. This would be the right-most node on the bottom level. Then we swap the root with its
+              smallest (or largest, depending on the type of heap) child, gradually moving it down the tree until the heap property is fulfilled again.
+            </h5>
+          </li>
+        </ol>
+      </h5>
+      <br>
+      <h3>Examples</h4>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        Please refer to the page on <a href="./trees.html">Trees</a> to see how to implement a binary tree. This page will only describe how
+        insert and retrieval works.
+      </h5>
+    <br>
+    <!-- Footer -->
+    <h6 class="center grey-text text-darken-1">Developed by Logan Crocker</h6>
+    <div class="row">
+      <div class=" center col s1 offset-s5">
+        <a href="https://github.com/logancrocker/">Github</a>
+      </div>
+      <div class="col s1">
+        <a href="https://logancrocker.github.io/">Portfolio</a>
+      </div>
+    </div>
+    <div class="center">
+      <h6 class="grey-text text-darken-1">Many thanks and credit to Gayle Laakmann McDowell</h6>
+      <a class="center" href="http://www.crackingthecodinginterview.com/">Crack the Coding Interview</a>
+    </div>
+    <br>
+  </div>
+
+  <!-- JS imports -->
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <!-- materialize.js -->
+  <script type="text/javascript" src="./../../js/materialize.min.js"></script>
+  <!-- nav.js -->
+  <script src="./../../js/nav.js"></script>
+  <!-- syntax highlighting -->
+  <script src="./../../js/prism.js"></script>
+</body>

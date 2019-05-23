@@ -169,7 +169,8 @@ class Graph:
               <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
 // C++
 class Graph {
-  vector&lt;vector&lt;bool&gt; &gt; matrix;
+  int numNodes;
+  int matrix[numNodes][numNodes];
 }
               </code></pre>
             </h5>
@@ -183,6 +184,7 @@ class Graph {
 class Graph:
   def __init__(self, numNodes):
     self.matrix = [[False for i in range(numNodes)] for i in range(numNodes)]
+
               </code></pre>
             </h5>
           </div>

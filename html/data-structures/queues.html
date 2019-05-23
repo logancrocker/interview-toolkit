@@ -1,1 +1,241 @@
-queues
+<!DOCTYPE html>
+<head>
+  <title>
+    Interview Toolkit
+  </title>
+  <!-- Google Icon Font -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- materialize.css -->
+  <link type="text/css" rel="stylesheet" href="./../../css/materialize.min.css"  media="screen,projection"/>
+  <!-- syntax highlighting -->
+  <link type="text/css" rel="stylesheet" href="./../../css/prism.css">
+</head>
+<body class="grey lighten-5">
+  <div class="container">
+    <!-- Data structures dropdown -->
+    <ul id="data-structures-dropdown" class="dropdown-content">
+        <li><a class="blue-text text-darken-5" href="./../data-structures/linked-list.html">Linked Lists</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/trees.html">Trees</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/tries.html">Tries</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/graphs.html">Graphs</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/stacks.html">Stacks</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/queues.html">Queues</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/heaps.html">Heaps</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/vectors.html">Vectors</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/hash-tables.html">Hash tables</a></li>
+      </ul>
+      <!-- Algorithms dropdown -->
+      <ul id="algorithms-dropdown" class="dropdown-content">
+        <li><a class="blue-text text-darken-5" href="#">BFS</a></li>
+        <li><a class="blue-text text-darken-5" href="#">DFS</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Binary Search</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Merge Sort</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Quick Sort</a></li>
+      </ul>
+      <!-- Concepts dropdown -->
+      <ul id="concepts-dropdown" class="dropdown-content ">
+        <li><a class="blue-text text-darken-5" href="#">Bit Manipulation</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Memory</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Recursion</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Dynamic Programming</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Big O</a></li>
+      </ul>
+      <!-- Navigation bar -->
+      <nav class="blue lighten-2">
+        <div class="nav-wrapper">
+          <a href="./../main/index.html" class="brand-logo" style="margin-left: 15px; font-size: 28px;">
+            Welcome to the Interview Toolkit.
+          </a>
+          <ul class="right hide-on-med-and-down">
+            <li class="active">
+              <a class="dropdown-trigger" data-target="data-structures-dropdown" href="data-structures.html"
+                 style="font-size: 24px;">Data Structures</a>
+            </li>
+            <li>
+              <a class="dropdown-trigger" data-target="algorithms-dropdown" href="#"
+                 style="font-size: 24px;">Algorithms</a>
+            </li>
+            <li>
+              <a class="dropdown-trigger"  data-target="concepts-dropdown" href="#"
+                 style="font-size: 24px;">Concepts</a>
+            </li>
+          </ul>
+         </div>
+      </nav>
+      <h2>Queues</h2>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        A queue is a linear data structure that abides by the policy of First in, First out (FIFO). Queues are pretty straightforward. You can think of it
+        as waiting in line for a ride at Disneyland, or as the British would say, "queueing".
+      </h5>
+      <br>
+      <h3>Implementation</h3>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        A queue can be implemented with anything like an array or linked list, just like stacks. The only difference is you add items to one end and remove them
+        from the opposite end.
+      </h5>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        A <code class="black-text">Queue</code> class must support four operations:
+        <ol class="black-text">
+          <li><code>add(item)</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">Add an item to the end of the queue.</h5>
+          </li>
+          <li><code>remove()</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">Remove the first (oldest) item in the queue.</h5>
+          </li>
+          <li><code>peek()</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">Return the first (oldest) item in the queue.</h5>
+          </li>
+          <li><code>isEmpty()</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">Return <code class="black-text">true</code> if the queue is empty.</h5>
+          </li>
+        </ol>
+      </h5>
+      <br>
+      <h3>Examples</h4>
+      <br>
+      <div class="row">
+        <div class="col s6">
+          <div class="col-content">
+            <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
+// C++
+#include &lt;iostream&gt;
+
+using namespace std;
+    
+class Queue {
+  private:
+    int queue[10];
+    int size = 0;
+    int first = 0;
+    int last = 0;
+    
+  public:
+    void add(int item) {
+      if (last == 10) {
+        cout << "Full queue!" << endl;
+      }
+      else {
+        this->queue[last] = item;
+        this->last += 1;
+        this->size += 1;
+      }
+    }
+    
+    void remove() {
+      if (first == last) {
+        cout << "Empty queue!" << endl;
+      }
+      else {
+        for (int i = 0; i < last - 1; i++) {
+          this->queue[i] = queue[i + 1];
+        }
+        this->last -= 1;
+        this->size -= 1;
+      }
+    }
+    
+    bool isEmpty() {
+      return this->size == 0;
+    }
+    
+    int peek() {
+      if (this->size == 0) {
+        cout << "Empty queue!" << endl;
+        return -1;
+      }
+      else {
+        return this->queue[first];
+      }
+    }
+};
+            </code></pre>
+          </div>
+        </div>
+        <div class="col s6">
+          <div class="col-content">
+            <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
+# Python
+class Queue:
+
+  def __init__(self):
+    self.queue = []
+
+  def isEmpty(self):
+    return len(self.queue) == 0
+
+  def add(self, data):
+    self.queue.append(data)
+
+  def remove(self):
+    if (not len(self.queue) == 0):
+      self.queue.pop(0)
+    else:
+      print("Empty queue!")
+  
+  def peek(self):
+    if (not len(self.queue) == 0):
+      return self.queue[0]
+    else:
+      print("Empty queue!")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </code></pre>
+          </div>
+        </div>
+      </div>
+    <br>
+    <!-- Footer -->
+    <h6 class="center grey-text text-darken-1">Developed by Logan Crocker</h6>
+    <div class="row">
+      <div class=" center col s1 offset-s5">
+        <a href="https://github.com/logancrocker/">Github</a>
+      </div>
+      <div class="col s1">
+        <a href="https://logancrocker.github.io/">Portfolio</a>
+      </div>
+    </div>
+    <div class="center">
+      <h6 class="grey-text text-darken-1">Many thanks and credit to Gayle Laakmann McDowell</h6>
+      <a class="center" href="http://www.crackingthecodinginterview.com/">Crack the Coding Interview</a>
+    </div>
+    <br>
+  </div>
+
+  <!-- JS imports -->
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <!-- materialize.js -->
+  <script type="text/javascript" src="./../../js/materialize.min.js"></script>
+  <!-- nav.js -->
+  <script src="./../../js/nav.js"></script>
+  <!-- syntax highlighting -->
+  <script src="./../../js/prism.js"></script>
+</body>
