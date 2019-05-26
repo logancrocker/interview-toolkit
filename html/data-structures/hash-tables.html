@@ -1,1 +1,156 @@
-hash tables
+<!DOCTYPE html>
+<head>
+  <title>
+    Interview Toolkit
+  </title>
+  <!-- Google Icon Font -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- materialize.css -->
+  <link type="text/css" rel="stylesheet" href="./../../css/materialize.min.css"  media="screen,projection"/>
+  <!-- syntax highlighting -->
+  <link type="text/css" rel="stylesheet" href="./../../css/prism.css">
+</head>
+<body class="grey lighten-5">
+  <div class="container">
+    <!-- Data structures dropdown -->
+    <ul id="data-structures-dropdown" class="dropdown-content">
+        <li><a class="blue-text text-darken-5" href="./../data-structures/linked-list.html">Linked Lists</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/trees.html">Trees</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/tries.html">Tries</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/graphs.html">Graphs</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/stacks.html">Stacks</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/queues.html">Queues</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/heaps.html">Heaps</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/vectors.html">Vectors</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/hash-tables.html">Hash tables</a></li>
+      </ul>
+      <!-- Algorithms dropdown -->
+      <ul id="algorithms-dropdown" class="dropdown-content">
+        <li><a class="blue-text text-darken-5" href="#">BFS</a></li>
+        <li><a class="blue-text text-darken-5" href="#">DFS</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Binary Search</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Merge Sort</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Quick Sort</a></li>
+      </ul>
+      <!-- Concepts dropdown -->
+      <ul id="concepts-dropdown" class="dropdown-content ">
+        <li><a class="blue-text text-darken-5" href="#">Bit Manipulation</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Memory</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Recursion</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Dynamic Programming</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Big O</a></li>
+      </ul>
+      <!-- Navigation bar -->
+      <nav class="blue lighten-2">
+        <div class="nav-wrapper">
+          <a href="./../main/index.html" class="brand-logo" style="margin-left: 15px; font-size: 28px;">
+            Welcome to the Interview Toolkit.
+          </a>
+          <ul class="right hide-on-med-and-down">
+            <li class="active">
+              <a class="dropdown-trigger" data-target="data-structures-dropdown" href="data-structures.html"
+                 style="font-size: 24px;">Data Structures</a>
+            </li>
+            <li>
+              <a class="dropdown-trigger" data-target="algorithms-dropdown" href="#"
+                 style="font-size: 24px;">Algorithms</a>
+            </li>
+            <li>
+              <a class="dropdown-trigger"  data-target="concepts-dropdown" href="#"
+                 style="font-size: 24px;">Concepts</a>
+            </li>
+          </ul>
+         </div>
+      </nav>
+      <h2>Hash tables</h2>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        Hash tables are way of mapping keys to values and are very popular because they provide extremely fast lookup.
+        If you are familiar with Python, a Python dictionary is implemented with a hash table. Hash tables are a good data structure
+        to know because they can often be used for optimization. For example, if you need to keep track of previous strings
+        in an algorithm, you can store them in a hash table to be looked up quickly later. Hash tables are commonly used for storing
+        strings.
+      </h5>
+      <br>
+      <h3>Implementation</h3>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        A hash table is implemented with a linear data structure such as an array, which is indexed via a <code class="black-text">hash()</code> function. This function
+        takes a <b>key</b> &mdash; in our example, a string &mdash; and maps it to a <b>value</b>. For example, lets say our hash table
+        has a size of 10 &mdash; i.e., its underlying array has a size of 10. Our hash function could then return the sum of all the characters in the key, modulo
+        10. This would create a value in the range of the array indices that can be used to insert and retrieve it. When we want to retrieve that key
+        (or check if it exists), we just hash it again and then access the array. This is why hash tables have extremely fast lookup and retrieval speeds.
+      </h5>
+      <br>
+      <br>
+      <h3>Examples</h4>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        Key-value maps (dictionaries) are native to Python so I only implemented a simple Hash table in C++.
+      </h5>
+      <br>
+      <div class="row">
+        <div class="col s12">
+          <div class="col-content">
+            <h5>
+              <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
+// C++
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+  
+using namespace std;
+  
+class Hash {
+  private:
+    string* keys = new string[100];
+  public:
+    int hash(string key) {
+      int sum = 0;
+      for (char c : key) {
+        sum += c;
+      }
+      return sum % 100;
+    }
+    void insert(string key) {
+      int index = this->hash(key);
+      this->keys[index] = key;
+      return;
+    }
+    string retrieve(string key) {
+      int index = this->hash(key);
+      return this->keys[index];
+    }
+};
+              </code></pre>
+            </h5>
+          </div>
+        </div>
+      </div>
+    <br>
+    <!-- Footer -->
+    <h6 class="center grey-text text-darken-1">Developed by Logan Crocker</h6>
+    <div class="row">
+      <div class=" center col s1 offset-s5">
+        <a href="https://github.com/logancrocker/">Github</a>
+      </div>
+      <div class="col s1">
+        <a href="https://logancrocker.github.io/">Portfolio</a>
+      </div>
+    </div>
+    <div class="center">
+      <h6 class="grey-text text-darken-1">Many thanks and credit to Gayle Laakmann McDowell</h6>
+      <a class="center" href="http://www.crackingthecodinginterview.com/">Crack the Coding Interview</a>
+    </div>
+    <br>
+  </div>
+
+  <!-- JS imports -->
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <!-- materialize.js -->
+  <script type="text/javascript" src="./../../js/materialize.min.js"></script>
+  <!-- nav.js -->
+  <script src="./../../js/nav.js"></script>
+  <!-- syntax highlighting -->
+  <script src="./../../js/prism.js"></script>
+</body>
