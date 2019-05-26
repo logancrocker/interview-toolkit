@@ -6,9 +6,9 @@
   <!-- Google Icon Font -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- materialize.css -->
-  <link type="text/css" rel="stylesheet" href="./../../css/materialize.min.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="./../css/materialize.min.css"  media="screen,projection"/>
   <!-- syntax highlighting -->
-  <link type="text/css" rel="stylesheet" href="./../../css/prism.css">
+  <link type="text/css" rel="stylesheet" href="./../css/prism.css">
 </head>
 <body class="grey lighten-5">
   <div class="container">
@@ -62,41 +62,56 @@
           </ul>
          </div>
       </nav>
-      <h2>Vectors</h2>
+      <h2>Graphs</h2>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        Vectors are dynamic lists in C++. In Python they are called lists and in Java they are called ArrayLists, but the name doesn't matter.
-        Dynamically resizable lists are an important concept to know. 
+        A graph is a collection of nodes connected by edges. A graph can be either <b>directed</b> or
+        <b>undirected</b>. In a directed graph, you can only traverse an edge in a certain direction.
+        In an undirected graph, you can traverse an edge in either direction. A graph with edges between
+        every pair of vertices is called <b>connected</b>. A graph without cycles is known as <b>acyclic</b>.
       </h5>
       <br>
+      <br>
+      <div class="row">
+        <div class="col s6">
+          <div class="center col-content">
+            <img class="responsive-img" src="./../img/Directed_graph.png" alt="directed graph"
+                 style="border: 1px solid grey; border-radius: 10px; background-color: rgb(240, 240, 240);">
+            <h6>Directed Graph</h6>
+          </div>
+        </div>
+        <div class="col s6">
+          <div class="center col-content">
+            <img class="responsive-img" src="./../img/undirected.png" alt="directed graph"
+                 style="border: 1px solid grey; border-radius: 10px; background-color: rgb(240, 240, 240);">
+            <h6>Unirected Graph</h6>
+          </div>
+        </div>
+      </div>
       <h3>Implementation</h3>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        These types of data structures are implemented with an array, regardless of the language you use. Whenever an item is added that exceeds
-        the size of the array, all the items are copied over to a larger array. In Java the new array is larger by a factor of 2, but this can vary
-        and is up to you when you implement something like this.
-      </h5>
-      <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        A <code class="black-text">Vector</code> class can support a myriad of operations, but there are four that are the bare minimum:
-        <ol class="black-text">
-          <li><code>empty()</code>
+        There are two ways to implement a graph. With an <b>adjacency matrix</b> or an <b>adjacency list</b>.
+        <br>
+        <ol>
+          <li class="black-text">
+            Adjacency Matrix
+            <br>
             <h5 class="grey-text text-darken-1" style="line-height: 175%">
-              Returns true if the container is empty.
+              The graph is stored as an NxN matrix of booleans, where N is the number of nodes. If there is an edge
+              from <code class="black-text">i</code> to <code class="black-text">j</code>, then <code class="black-text">mat[i][j]</code>
+              is <code class="black-text">true</code>. Everywhere else is <code class="black-text">false</code>. This implementation
+              is generally not preferred as you have to iterate through all the nodes to find the neighbors of a node.
             </h5>
           </li>
-          <li><code>size()</code>
+          <li class="black-text">
+            Adjacency List
+            <br>
             <h5 class="grey-text text-darken-1" style="line-height: 175%">
-              Returns the size of the container (number of items in the container).
-            </h5>
-          </li>
-          <li><code>push_back(item)</code>
-            <h5 class="grey-text text-darken-1" style="line-height: 175%">
-              Appends an item to the end of the list.
-            </h5>
-          </li>
-          <li><code>at(index)</code>
-            <h5 class="grey-text text-darken-1" style="line-height: 175%">
-              Returns the item at the given index in the underlying array.
+              We use a <code class="black-text">Node</code> class, which contains a list of all its children.
+              The graph is then represented with a <code class="black-text">Graph</code> class, which contains a 
+              list of all its nodes. This is necessary because it is not always possible to reach every node from
+              a root node, like with a <a href="./trees.html">tree</a>.
             </h5>
           </li>
         </ol>
@@ -104,64 +119,72 @@
       <br>
       <h3>Examples</h4>
       <br>
-      <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        Dynamic lists work out of the box for Python, so I've only included an implementation for vectors in C++.
+      <h5 class="black-text">
+        Adjacency List
       </h5>
       <br>
       <div class="row">
-        <div class="col s12">
+        <div class="col s6">
           <div class="col-content">
             <h5>
               <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
 // C++
-#include &lt;iostream&gt;
+class Node {
+  char label;
+  Node neighbors[];
+}
+class Graph {
+  Node nodes[];
+}
+              </code></pre>
+            </h5>
+          </div>
+        </div>
+        <div class="col s6">
+          <div class="col-content">
+            <h5>
+              <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
+# Python
+class Node:
+  def __init__(self, label):
+    self.label = label
+    self.neighbors = []
+class Graph:
+  def __init__(self):
+    self.nodes = []
+              </code></pre>
+            </h5>
+          </div>
+        </div>
+      </div>
+      <br>
+      <h5 class="black-text">
+        Adjacency Matrix
+      </h5>
+      <br>
+      <div class="row">
+        <div class="col s6">
+          <div class="col-content">
+            <h5>
+              <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
+// C++
+class Graph {
+  int numNodes;
+  int matrix[numNodes][numNodes];
+}
+              </code></pre>
+            </h5>
+          </div>
+        </div>
+        <div class="col s6">
+          <div class="col-content">
+            <h5>
+              <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
+# Python
+class Graph:
+  def __init__(self, numNodes):
+    self.matrix = [[False for i in range(numNodes)] for i in range(numNodes)]
 
-using namespace std;
-    
-class Vector {
-  private:
-    int* items = new int[5];
-    int capacity = 5;
-    int length = 0;
-    
-  public:
-    bool empty() {
-      return this->length == 0;
-    }
-    
-    int size() {
-      return this->length;
-    }
-    
-    void push_back(int item) {
-      if (this->length < this->capacity) {
-        this->items[this->length] = item;
-        this->length++;
-      }
-      else {
-        int newCapacity = this->capacity * 2;
-        int* newItems = new int[newCapacity];
-        for (int i = 0; i < this->capacity; ++i) {
-          newItems[i] = this->items[i];
-        }
-        newItems[this->length] = item;
-        this->length++;
-        delete[] this->items;
-        this->items = newItems;
-        this->capacity = newCapacity;
-      }
-    }
-    
-    int at(int index) {
-      if (this->length == 0) {
-        cout << "Empty vector!" << endl;
-        return -1;
-      }
-      else {
-        return this->items[index];
-      }
-    }
-};
               </code></pre>
             </h5>
           </div>
@@ -189,9 +212,9 @@ class Vector {
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <!-- materialize.js -->
-  <script type="text/javascript" src="./../../js/materialize.min.js"></script>
+  <script type="text/javascript" src="./../js/materialize.min.js"></script>
   <!-- nav.js -->
-  <script src="./../../js/nav.js"></script>
+  <script src="./../js/nav.js"></script>
   <!-- syntax highlighting -->
-  <script src="./../../js/prism.js"></script>
+  <script src="./../js/prism.js"></script>
 </body>

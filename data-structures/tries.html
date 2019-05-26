@@ -6,9 +6,9 @@
   <!-- Google Icon Font -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- materialize.css -->
-  <link type="text/css" rel="stylesheet" href="./../../css/materialize.min.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="./../css/materialize.min.css"  media="screen,projection"/>
   <!-- syntax highlighting -->
-  <link type="text/css" rel="stylesheet" href="./../../css/prism.css">
+  <link type="text/css" rel="stylesheet" href="./../css/prism.css">
 </head>
 <body class="grey lighten-5">
   <div class="container">
@@ -62,66 +62,48 @@
           </ul>
          </div>
       </nav>
-      <h2>Graphs</h2>
+      <h2>Tries</h2>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        A graph is a collection of nodes connected by edges. A graph can be either <b>directed</b> or
-        <b>undirected</b>. In a directed graph, you can only traverse an edge in a certain direction.
-        In an undirected graph, you can traverse an edge in either direction. A graph with edges between
-        every pair of vertices is called <b>connected</b>. A graph without cycles is known as <b>acyclic</b>.
+        A trie is a type of <a href="./trees.html">Tree</a>, which is a type of 
+        <a href="./graphs.html">Graph</a>. You may sometimes see them be referred to as 
+        prefix trees. Tries were invented as a solution to a very specific problem, which 
+        was storing and retrieving strings.
+        <blockquote style="border-left-color: #64b5f6; margin-left: 5%; margin-right: 5%;">
+          A trie is a variant of an n-ary tree in which characters are stored at each node.
+          Each path down the tree may represent a word.
+        </blockquote>
+        <h6 class="grey-text text-darken-1 center">McDowell, "Cracking the Coding Interview"</h6>
+      </h5>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        Typically there will be a way to indicate the end of a word. These can be implemented as a special child 
+        such as <code class="black-text">TerminatingTrieNode</code> or by storing a boolean flag in
+        the parent, such as <code class="black-text">terminates</code> (McDowell, "Cracking the Coding Interview").
+      </h5>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        Tries are a very common data structure to be used whenever some type of word validation
+        is needed. A common use case would be implementing an autocomplete function.
       </h5>
       <br>
       <br>
-      <div class="row">
-        <div class="col s6">
-          <div class="center col-content">
-            <img class="responsive-img" src="./../../img/Directed_graph.png" alt="directed graph"
-                 style="border: 1px solid grey; border-radius: 10px; background-color: rgb(240, 240, 240);">
-            <h6>Directed Graph</h6>
-          </div>
-        </div>
-        <div class="col s6">
-          <div class="center col-content">
-            <img class="responsive-img" src="./../../img/undirected.png" alt="directed graph"
-                 style="border: 1px solid grey; border-radius: 10px; background-color: rgb(240, 240, 240);">
-            <h6>Unirected Graph</h6>
-          </div>
-        </div>
+      <div class="center">
+          <img class="center reponsive-img" src="./../img/trie.PNG" 
+          style="border: 1px solid grey; border-radius: 10px;" alt="binary trees">
+          <h6>A Trie with terminating nodes</h6>
+          <h6>"Cracking the Coding Interview", p. 105</h6>
       </div>
+      <br>
+      <br>
       <h3>Implementation</h3>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        There are two ways to implement a graph. With an <b>adjacency matrix</b> or an <b>adjacency list</b>.
-        <br>
-        <ol>
-          <li class="black-text">
-            Adjacency Matrix
-            <br>
-            <h5 class="grey-text text-darken-1" style="line-height: 175%">
-              The graph is stored as an NxN matrix of booleans, where N is the number of nodes. If there is an edge
-              from <code class="black-text">i</code> to <code class="black-text">j</code>, then <code class="black-text">mat[i][j]</code>
-              is <code class="black-text">true</code>. Everywhere else is <code class="black-text">false</code>. This implementation
-              is generally not preferred as you have to iterate through all the nodes to find the neighbors of a node.
-            </h5>
-          </li>
-          <li class="black-text">
-            Adjacency List
-            <br>
-            <h5 class="grey-text text-darken-1" style="line-height: 175%">
-              We use a <code class="black-text">Node</code> class, which contains a list of all its children.
-              The graph is then represented with a <code class="black-text">Graph</code> class, which contains a 
-              list of all its nodes. This is necessary because it is not always possible to reach every node from
-              a root node, like with a <a href="./trees.html">tree</a>.
-            </h5>
-          </li>
-        </ol>
+        A trie is implemented in a very similar way to any other tree, but with a slight twist. Each <code class="black-text">Node</code>
+        contains a <a href="./hash-tables.html">Hash table</a> of its children that maps from a key (character) to its corresponding 
+        <code class="black-text">Node</code>. The simplest way to indicate when a word terminates would be to use a boolean 
+        <code class="black-text">terminates</code> flag set to true for any <code class="black-text">Node</code> that completes a word.
       </h5>
       <br>
       <h3>Examples</h4>
-      <br>
-      <h5 class="black-text">
-        Adjacency List
-      </h5>
       <br>
       <div class="row">
         <div class="col s6">
@@ -130,11 +112,9 @@
               <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
 // C++
 class Node {
-  char label;
-  Node neighbors[];
-}
-class Graph {
-  Node nodes[];
+  char key;
+  HashMap&lt;char, Node&gt; children;
+  bool terminates;
 }
               </code></pre>
             </h5>
@@ -146,51 +126,16 @@ class Graph {
               <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
 # Python
 class Node:
-  def __init__(self, label):
-    self.label = label
-    self.neighbors = []
-class Graph:
-  def __init__(self):
-    self.nodes = []
+  def __init__(self, key, flag):
+    self.key = key
+    self.terminates = flag
+    self.children = {}
               </code></pre>
             </h5>
           </div>
         </div>
       </div>
       <br>
-      <h5 class="black-text">
-        Adjacency Matrix
-      </h5>
-      <br>
-      <div class="row">
-        <div class="col s6">
-          <div class="col-content">
-            <h5>
-              <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
-// C++
-class Graph {
-  int numNodes;
-  int matrix[numNodes][numNodes];
-}
-              </code></pre>
-            </h5>
-          </div>
-        </div>
-        <div class="col s6">
-          <div class="col-content">
-            <h5>
-              <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
-# Python
-class Graph:
-  def __init__(self, numNodes):
-    self.matrix = [[False for i in range(numNodes)] for i in range(numNodes)]
-
-              </code></pre>
-            </h5>
-          </div>
-        </div>
-      </div>
-    <br>
     <!-- Footer -->
     <h6 class="center grey-text text-darken-1">Developed by Logan Crocker</h6>
     <div class="row">
@@ -212,9 +157,9 @@ class Graph:
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <!-- materialize.js -->
-  <script type="text/javascript" src="./../../js/materialize.min.js"></script>
+  <script type="text/javascript" src="./../js/materialize.min.js"></script>
   <!-- nav.js -->
-  <script src="./../../js/nav.js"></script>
+  <script src="./../js/nav.js"></script>
   <!-- syntax highlighting -->
-  <script src="./../../js/prism.js"></script>
+  <script src="./../js/prism.js"></script>
 </body>

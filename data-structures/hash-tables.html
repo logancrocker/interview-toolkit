@@ -6,9 +6,9 @@
   <!-- Google Icon Font -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- materialize.css -->
-  <link type="text/css" rel="stylesheet" href="./../../css/materialize.min.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="./../css/materialize.min.css"  media="screen,projection"/>
   <!-- syntax highlighting -->
-  <link type="text/css" rel="stylesheet" href="./../../css/prism.css">
+  <link type="text/css" rel="stylesheet" href="./../css/prism.css">
 </head>
 <body class="grey lighten-5">
   <div class="container">
@@ -62,56 +62,70 @@
           </ul>
          </div>
       </nav>
-      <h2>Heaps</h2>
+      <h2>Hash tables</h2>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        A heap is essentially a type of complete binary <a href="./trees.html">Tree</a>. In a <b>min-heap</b>, each node is smaller than
-        its children. Likewise, in a <b>max-heap</b>, each node is larger than its children. This means the root node is always the max or min item.
-        Heaps are useful for when you need a way to quickly retrieve or delete the max or min item in a collection. Heaps are a common way of 
-        implementing a priority queue, and sometimes priority queues are called heaps.
+        Hash tables are way of mapping keys to values and are very popular because they provide extremely fast lookup.
+        If you are familiar with Python, a Python dictionary is implemented with a hash table. Hash tables are a good data structure
+        to know because they can often be used for optimization. For example, if you need to keep track of previous strings
+        in an algorithm, you can store them in a hash table to be looked up quickly later. Hash tables are commonly used for storing
+        strings.
       </h5>
-      <br>
-      <br>
-      <div class="center">
-        <img class="responsive-img" style="border: 1px solid grey; border-radius: 10px;"" 
-             src="./../../img/heap.bmp" alt="heap">
-        <h6>
-          Min heap (left) and max heap (right)
-        </h6>
-      </div>
       <br>
       <h3>Implementation</h3>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        A heap is implemented as a binary tree, with functions unique to a heap.
+        A hash table is implemented with a linear data structure such as an array, which is indexed via a <code class="black-text">hash()</code> function. This function
+        takes a <b>key</b> &mdash; in our example, a string &mdash; and maps it to a <b>value</b>. For example, lets say our hash table
+        has a size of 10 &mdash; i.e., its underlying array has a size of 10. Our hash function could then return the sum of all the characters in the key, modulo
+        10. This would create a value in the range of the array indices that can be used to insert and retrieve it. When we want to retrieve that key
+        (or check if it exists), we just hash it again and then access the array. This is why hash tables have extremely fast lookup and retrieval speeds.
       </h5>
-      <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        A <code class="black-text">Heap</code> class must support two key operations:
-        <ol class="black-text">
-          <li><code>insert(item)</code>
-            <h5 class="grey-text text-darken-1" style="line-height: 175%">
-              This function inserts an item into the heap. In order to maintain completeness, we start at the bottom level
-              and find the first available spot from left to right. Then, while the new item's parent is greater/less than
-              (this depends on the type of heap) the new item, we swap the two. We continue doing this, gradually moving the new item
-              up the tree until we find the right spot for it.
-            </h5>
-          </li>
-          <li><code>retrieve_min()</code> (<code>retrieve_max()</code> for a max-heap)
-            <h5 class="grey-text text-darken-1" style="line-height: 175%">
-              This function simply grabs the max or min item in the heap, which is always the root. To remove it, we first remove the root
-              and replace it with the bottom-most item. This would be the right-most node on the bottom level. Then we swap the root with its
-              smallest (or largest, depending on the type of heap) child, gradually moving it down the tree until the heap property is fulfilled again.
-            </h5>
-          </li>
-        </ol>
-      </h5>
+      <br>
       <br>
       <h3>Examples</h4>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        Please refer to the page on <a href="./trees.html">Trees</a> to see how to implement a binary tree. This page will only describe how
-        insert and retrieval works.
+        Key-value maps (dictionaries) are native to Python so I only implemented a simple Hash table in C++.
       </h5>
+      <br>
+      <div class="row">
+        <div class="col s12">
+          <div class="col-content">
+            <h5>
+              <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
+// C++
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+  
+using namespace std;
+  
+class Hash {
+  private:
+    string* keys = new string[100];
+  public:
+    int hash(string key) {
+      int sum = 0;
+      for (char c : key) {
+        sum += c;
+      }
+      return sum % 100;
+    }
+    void insert(string key) {
+      int index = this->hash(key);
+      this->keys[index] = key;
+      return;
+    }
+    string retrieve(string key) {
+      int index = this->hash(key);
+      return this->keys[index];
+    }
+};
+              </code></pre>
+            </h5>
+          </div>
+        </div>
+      </div>
     <br>
     <!-- Footer -->
     <h6 class="center grey-text text-darken-1">Developed by Logan Crocker</h6>
@@ -134,9 +148,9 @@
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <!-- materialize.js -->
-  <script type="text/javascript" src="./../../js/materialize.min.js"></script>
+  <script type="text/javascript" src="./../js/materialize.min.js"></script>
   <!-- nav.js -->
-  <script src="./../../js/nav.js"></script>
+  <script src="./../js/nav.js"></script>
   <!-- syntax highlighting -->
-  <script src="./../../js/prism.js"></script>
+  <script src="./../js/prism.js"></script>
 </body>

@@ -6,9 +6,9 @@
   <!-- Google Icon Font -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- materialize.css -->
-  <link type="text/css" rel="stylesheet" href="./../../css/materialize.min.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="./../css/materialize.min.css"  media="screen,projection"/>
   <!-- syntax highlighting -->
-  <link type="text/css" rel="stylesheet" href="./../../css/prism.css">
+  <link type="text/css" rel="stylesheet" href="./../css/prism.css">
 </head>
 <body class="grey lighten-5">
   <div class="container">
@@ -62,67 +62,152 @@
           </ul>
          </div>
       </nav>
-      <h2>Hash tables</h2>
+      <h2>Queues</h2>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        Hash tables are way of mapping keys to values and are very popular because they provide extremely fast lookup.
-        If you are familiar with Python, a Python dictionary is implemented with a hash table. Hash tables are a good data structure
-        to know because they can often be used for optimization. For example, if you need to keep track of previous strings
-        in an algorithm, you can store them in a hash table to be looked up quickly later. Hash tables are commonly used for storing
-        strings.
+        A queue is a linear data structure that abides by the policy of First in, First out (FIFO). Queues are pretty straightforward. You can think of it
+        as waiting in line for a ride at Disneyland, or as the British would say, "queueing".
       </h5>
       <br>
       <h3>Implementation</h3>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        A hash table is implemented with a linear data structure such as an array, which is indexed via a <code class="black-text">hash()</code> function. This function
-        takes a <b>key</b> &mdash; in our example, a string &mdash; and maps it to a <b>value</b>. For example, lets say our hash table
-        has a size of 10 &mdash; i.e., its underlying array has a size of 10. Our hash function could then return the sum of all the characters in the key, modulo
-        10. This would create a value in the range of the array indices that can be used to insert and retrieve it. When we want to retrieve that key
-        (or check if it exists), we just hash it again and then access the array. This is why hash tables have extremely fast lookup and retrieval speeds.
+        A queue can be implemented with anything like an array or linked list, just like stacks. The only difference is you add items to one end and remove them
+        from the opposite end.
       </h5>
-      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        A <code class="black-text">Queue</code> class must support four operations:
+        <ol class="black-text">
+          <li><code>add(item)</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">Add an item to the end of the queue.</h5>
+          </li>
+          <li><code>remove()</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">Remove the first (oldest) item in the queue.</h5>
+          </li>
+          <li><code>peek()</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">Return the first (oldest) item in the queue.</h5>
+          </li>
+          <li><code>isEmpty()</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">Return <code class="black-text">true</code> if the queue is empty.</h5>
+          </li>
+        </ol>
+      </h5>
       <br>
       <h3>Examples</h4>
       <br>
-      <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        Key-value maps (dictionaries) are native to Python so I only implemented a simple Hash table in C++.
-      </h5>
-      <br>
       <div class="row">
-        <div class="col s12">
+        <div class="col s6">
           <div class="col-content">
-            <h5>
-              <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
+            <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
 // C++
 #include &lt;iostream&gt;
-#include &lt;string&gt;
-  
+
 using namespace std;
-  
-class Hash {
+    
+class Queue {
   private:
-    string* keys = new string[100];
+    int queue[10];
+    int size = 0;
+    int first = 0;
+    int last = 0;
+    
   public:
-    int hash(string key) {
-      int sum = 0;
-      for (char c : key) {
-        sum += c;
+    void add(int item) {
+      if (last == 10) {
+        cout << "Full queue!" << endl;
       }
-      return sum % 100;
+      else {
+        this->queue[last] = item;
+        this->last += 1;
+        this->size += 1;
+      }
     }
-    void insert(string key) {
-      int index = this->hash(key);
-      this->keys[index] = key;
-      return;
+    
+    void remove() {
+      if (first == last) {
+        cout << "Empty queue!" << endl;
+      }
+      else {
+        for (int i = 0; i < last - 1; i++) {
+          this->queue[i] = queue[i + 1];
+        }
+        this->last -= 1;
+        this->size -= 1;
+      }
     }
-    string retrieve(string key) {
-      int index = this->hash(key);
-      return this->keys[index];
+    
+    bool isEmpty() {
+      return this->size == 0;
+    }
+    
+    int peek() {
+      if (this->size == 0) {
+        cout << "Empty queue!" << endl;
+        return -1;
+      }
+      else {
+        return this->queue[first];
+      }
     }
 };
-              </code></pre>
-            </h5>
+            </code></pre>
+          </div>
+        </div>
+        <div class="col s6">
+          <div class="col-content">
+            <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
+# Python
+class Queue:
+
+  def __init__(self):
+    self.queue = []
+
+  def isEmpty(self):
+    return len(self.queue) == 0
+
+  def add(self, data):
+    self.queue.append(data)
+
+  def remove(self):
+    if (not len(self.queue) == 0):
+      self.queue.pop(0)
+    else:
+      print("Empty queue!")
+  
+  def peek(self):
+    if (not len(self.queue) == 0):
+      return self.queue[0]
+    else:
+      print("Empty queue!")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </code></pre>
           </div>
         </div>
       </div>
@@ -148,9 +233,9 @@ class Hash {
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <!-- materialize.js -->
-  <script type="text/javascript" src="./../../js/materialize.min.js"></script>
+  <script type="text/javascript" src="./../js/materialize.min.js"></script>
   <!-- nav.js -->
-  <script src="./../../js/nav.js"></script>
+  <script src="./../js/nav.js"></script>
   <!-- syntax highlighting -->
-  <script src="./../../js/prism.js"></script>
+  <script src="./../js/prism.js"></script>
 </body>

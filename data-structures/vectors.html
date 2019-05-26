@@ -6,9 +6,9 @@
   <!-- Google Icon Font -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- materialize.css -->
-  <link type="text/css" rel="stylesheet" href="./../../css/materialize.min.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="./../css/materialize.min.css"  media="screen,projection"/>
   <!-- syntax highlighting -->
-  <link type="text/css" rel="stylesheet" href="./../../css/prism.css">
+  <link type="text/css" rel="stylesheet" href="./../css/prism.css">
 </head>
 <body class="grey lighten-5">
   <div class="container">
@@ -62,80 +62,112 @@
           </ul>
          </div>
       </nav>
-      <h2>Tries</h2>
+      <h2>Vectors</h2>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        A trie is a type of <a href="./trees.html">Tree</a>, which is a type of 
-        <a href="./graphs.html">Graph</a>. You may sometimes see them be referred to as 
-        prefix trees. Tries were invented as a solution to a very specific problem, which 
-        was storing and retrieving strings.
-        <blockquote style="border-left-color: #64b5f6; margin-left: 5%; margin-right: 5%;">
-          A trie is a variant of an n-ary tree in which characters are stored at each node.
-          Each path down the tree may represent a word.
-        </blockquote>
-        <h6 class="grey-text text-darken-1 center">McDowell, "Cracking the Coding Interview"</h6>
+        Vectors are dynamic lists in C++. In Python they are called lists and in Java they are called ArrayLists, but the name doesn't matter.
+        Dynamically resizable lists are an important concept to know. 
       </h5>
-      <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        Typically there will be a way to indicate the end of a word. These can be implemented as a special child 
-        such as <code class="black-text">TerminatingTrieNode</code> or by storing a boolean flag in
-        the parent, such as <code class="black-text">terminates</code> (McDowell, "Cracking the Coding Interview").
-      </h5>
-      <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        Tries are a very common data structure to be used whenever some type of word validation
-        is needed. A common use case would be implementing an autocomplete function.
-      </h5>
-      <br>
-      <br>
-      <div class="center">
-          <img class="center reponsive-img" src="./../../img/trie.PNG" 
-          style="border: 1px solid grey; border-radius: 10px;" alt="binary trees">
-          <h6>A Trie with terminating nodes</h6>
-          <h6>"Cracking the Coding Interview", p. 105</h6>
-      </div>
-      <br>
       <br>
       <h3>Implementation</h3>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        A trie is implemented in a very similar way to any other tree, but with a slight twist. Each <code class="black-text">Node</code>
-        contains a <a href="./hash-tables.html">Hash table</a> of its children that maps from a key (character) to its corresponding 
-        <code class="black-text">Node</code>. The simplest way to indicate when a word terminates would be to use a boolean 
-        <code class="black-text">terminates</code> flag set to true for any <code class="black-text">Node</code> that completes a word.
+        These types of data structures are implemented with an array, regardless of the language you use. Whenever an item is added that exceeds
+        the size of the array, all the items are copied over to a larger array. In Java the new array is larger by a factor of 2, but this can vary
+        and is up to you when you implement something like this.
+      </h5>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        A <code class="black-text">Vector</code> class can support a myriad of operations, but there are four that are the bare minimum:
+        <ol class="black-text">
+          <li><code>empty()</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">
+              Returns true if the container is empty.
+            </h5>
+          </li>
+          <li><code>size()</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">
+              Returns the size of the container (number of items in the container).
+            </h5>
+          </li>
+          <li><code>push_back(item)</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">
+              Appends an item to the end of the list.
+            </h5>
+          </li>
+          <li><code>at(index)</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">
+              Returns the item at the given index in the underlying array.
+            </h5>
+          </li>
+        </ol>
       </h5>
       <br>
       <h3>Examples</h4>
       <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        Dynamic lists work out of the box for Python, so I've only included an implementation for vectors in C++.
+      </h5>
+      <br>
       <div class="row">
-        <div class="col s6">
+        <div class="col s12">
           <div class="col-content">
             <h5>
               <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
 // C++
-class Node {
-  char key;
-  HashMap&lt;char, Node&gt; children;
-  bool terminates;
-}
-              </code></pre>
-            </h5>
-          </div>
-        </div>
-        <div class="col s6">
-          <div class="col-content">
-            <h5>
-              <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
-# Python
-class Node:
-  def __init__(self, key, flag):
-    self.key = key
-    self.terminates = flag
-    self.children = {}
+#include &lt;iostream&gt;
+
+using namespace std;
+    
+class Vector {
+  private:
+    int* items = new int[5];
+    int capacity = 5;
+    int length = 0;
+    
+  public:
+    bool empty() {
+      return this->length == 0;
+    }
+    
+    int size() {
+      return this->length;
+    }
+    
+    void push_back(int item) {
+      if (this->length < this->capacity) {
+        this->items[this->length] = item;
+        this->length++;
+      }
+      else {
+        int newCapacity = this->capacity * 2;
+        int* newItems = new int[newCapacity];
+        for (int i = 0; i < this->capacity; ++i) {
+          newItems[i] = this->items[i];
+        }
+        newItems[this->length] = item;
+        this->length++;
+        delete[] this->items;
+        this->items = newItems;
+        this->capacity = newCapacity;
+      }
+    }
+    
+    int at(int index) {
+      if (this->length == 0) {
+        cout << "Empty vector!" << endl;
+        return -1;
+      }
+      else {
+        return this->items[index];
+      }
+    }
+};
               </code></pre>
             </h5>
           </div>
         </div>
       </div>
-      <br>
+    <br>
     <!-- Footer -->
     <h6 class="center grey-text text-darken-1">Developed by Logan Crocker</h6>
     <div class="row">
@@ -157,9 +189,9 @@ class Node:
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <!-- materialize.js -->
-  <script type="text/javascript" src="./../../js/materialize.min.js"></script>
+  <script type="text/javascript" src="./../js/materialize.min.js"></script>
   <!-- nav.js -->
-  <script src="./../../js/nav.js"></script>
+  <script src="./../js/nav.js"></script>
   <!-- syntax highlighting -->
-  <script src="./../../js/prism.js"></script>
+  <script src="./../js/prism.js"></script>
 </body>

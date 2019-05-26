@@ -6,9 +6,9 @@
   <!-- Google Icon Font -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- materialize.css -->
-  <link type="text/css" rel="stylesheet" href="./../../css/materialize.min.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="./../css/materialize.min.css"  media="screen,projection"/>
   <!-- syntax highlighting -->
-  <link type="text/css" rel="stylesheet" href="./../../css/prism.css">
+  <link type="text/css" rel="stylesheet" href="./../css/prism.css">
 </head>
 <body class="grey lighten-5">
   <div class="container">
@@ -62,147 +62,74 @@
           </ul>
          </div>
       </nav>
-      <h2>Stacks</h2>
+      <h2>Linked Lists</h2>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        A stack is another type of linear data structure that is extremely common. Stacks follow one simple rule: Last in, First out (LIFO). This
-        means that the last item to be inserted into a stack is the first item to be retrieved. Just like stacks of items in real life, you must 
-        remove the items on top to get to the bottom items.
+        You've probably heard of arrays, or lists if you use Python. Well a linked list is
+        similar to these data structures, except the data within a Linked List is not stored
+        contiguously in memory. This is done by using pointers.
+      </h5>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        There are two implementations of Linked Lists: doubley-linked and singley-linked. In a doubley-linked
+        list, each node has a pointer to its next and previous nodes. In a singley-linked list, each node only
+        has a pointer to its next node. This means you can traverse from to 
+        tail for both, but can only traverse from tail to head for a doubley-linked list.
       </h5>
       <br>
       <h3>Implementation</h3>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        A stack can be implemented with any list-like data structure, such as an array or linked list. The key is that you only add or remove items
-        from one end, and always keep track of the <code class="black-text">top</code>.
+        A linked list is implemented with a <code class="black-text">Node</code> class, which contains a pointer to 
+        <code class="black-text">next</code> and a variable containing that node's <code class="black-text">data</code>.
+        If you are implementing a doubley-linked list, there will also be a pointer to <code class="black-text">prev</code>.
       </h5>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        A <code class="black-text">Stack</code> class must support four operations:
-        <ol class="black-text">
-          <li><code>pop()</code>
-            <h5 class="grey-text text-darken-1" style="line-height: 175%">Remove the top item from the stack.</h5>
-          </li>
-          <li><code>push(item)</code>
-            <h5 class="grey-text text-darken-1" style="line-height: 175%">Add an item to the top of the stack.</h5>
-          </li>
-          <li><code>peek()</code>
-            <h5 class="grey-text text-darken-1" style="line-height: 175%">Return the top of the stack.</h5>
-          </li>
-          <li><code>isEmpty()</code>
-            <h5 class="grey-text text-darken-1" style="line-height: 175%">Return <code class="black-text">true</code> if the stack is empty.</h5>
-          </li>
-        </ol>
+        You can also create a <code class="black-text">LinkedList</code> wrapper class which only contains the head 
+        <code class="black-text">Node</code>.
       </h5>
       <br>
       <h3>Examples</h4>
       <br>
+      <h5 class="grey-text text-darken-1">Below is an implementation of a singley linked list.</h5>
+      <br>
       <div class="row">
         <div class="col s6">
           <div class="col-content">
-            <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
+            <h5>
+              <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
 // C++
-#include &lt;iostream&gt;
-
-using namespace std;
-    
-class Stack {
-  private:
-    int stack[100];
-    int size = 0;
-    int top = this->stack[size];
-    
+class Node {
   public:
-    void pop() {
-      if (this->size >= 1) {
-        this->top = this->stack[size - 2];
-        this->size -= 1;
-      }
-      else {
-        cout << "Empty stack!" << endl;
-      }
-    }
-    
-    void push(int item) {
-      if (this->size < 100) {
-        this->stack[size] = item;
-        this->size += 1;
-        this->top = item;
-      }
-      else {
-        cout << "Stack overflow!" << endl;
-      }
-    }
-    
-    bool isEmpty() {
-      return this->size == 0;
-    }
-    
-    int peek() {
-      if (!this->isEmpty()) {
-        return this->top;
-      }
-      else {
-        return -1;
-      }
-    }
+    Node* next;
+    int data; 
+}
+class LinkedList {
+  public:
+    Node* head;
 };
-            </code></pre>
+                </code></pre>
+            </h5>
           </div>
         </div>
         <div class="col s6">
           <div class="col-content">
-            <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
+            <h5>
+              <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
 # Python
-class Stack:
+class Node:
+  def __init__(self, data):
+    self.data = data
+    self.next = None
 
-  def __init__(self):
-    self.stack = []
-              
-  def push(self, item):
-    self.stack.append(item)
-              
-  def pop(self):
-    if (not self.isEmpty()):
-      self.stack.pop()
-    else:
-      print("Empty stack!")
-              
-  def peek(self):
-    if (not self.isEmpty()):
-      return self.stack[len(self.stack) - 1]
-    else:
-      print("Empty stack!")
-              
-  def isEmpty(self):
-    return len(self.stack) == 0
+class LinkedList:
+  def __init__(self, head):
+    self.head = head
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            </code></pre>
+                </code></pre>
+            </h5>
           </div>
         </div>
       </div>
-    <br>
     <!-- Footer -->
     <h6 class="center grey-text text-darken-1">Developed by Logan Crocker</h6>
     <div class="row">
@@ -224,9 +151,9 @@ class Stack:
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <!-- materialize.js -->
-  <script type="text/javascript" src="./../../js/materialize.min.js"></script>
+  <script type="text/javascript" src="./../js/materialize.min.js"></script>
   <!-- nav.js -->
-  <script src="./../../js/nav.js"></script>
+  <script src="./../js/nav.js"></script>
   <!-- syntax highlighting -->
-  <script src="./../../js/prism.js"></script>
+  <script src="./../js/prism.js"></script>
 </body>

@@ -6,9 +6,9 @@
   <!-- Google Icon Font -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- materialize.css -->
-  <link type="text/css" rel="stylesheet" href="./../../css/materialize.min.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="./../css/materialize.min.css"  media="screen,projection"/>
   <!-- syntax highlighting -->
-  <link type="text/css" rel="stylesheet" href="./../../css/prism.css">
+  <link type="text/css" rel="stylesheet" href="./../css/prism.css">
 </head>
 <body class="grey lighten-5">
   <div class="container">
@@ -62,155 +62,56 @@
           </ul>
          </div>
       </nav>
-      <h2>Queues</h2>
+      <h2>Heaps</h2>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        A queue is a linear data structure that abides by the policy of First in, First out (FIFO). Queues are pretty straightforward. You can think of it
-        as waiting in line for a ride at Disneyland, or as the British would say, "queueing".
+        A heap is essentially a type of complete binary <a href="./trees.html">Tree</a>. In a <b>min-heap</b>, each node is smaller than
+        its children. Likewise, in a <b>max-heap</b>, each node is larger than its children. This means the root node is always the max or min item.
+        Heaps are useful for when you need a way to quickly retrieve or delete the max or min item in a collection. Heaps are a common way of 
+        implementing a priority queue, and sometimes priority queues are called heaps.
       </h5>
+      <br>
+      <br>
+      <div class="center">
+        <img class="responsive-img" style="border: 1px solid grey; border-radius: 10px;"" 
+             src="./../img/heap.bmp" alt="heap">
+        <h6>
+          Min heap (left) and max heap (right)
+        </h6>
+      </div>
       <br>
       <h3>Implementation</h3>
       <br>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        A queue can be implemented with anything like an array or linked list, just like stacks. The only difference is you add items to one end and remove them
-        from the opposite end.
+        A heap is implemented as a binary tree, with functions unique to a heap.
       </h5>
       <h5 class="grey-text text-darken-1" style="line-height: 175%">
-        A <code class="black-text">Queue</code> class must support four operations:
+        A <code class="black-text">Heap</code> class must support two key operations:
         <ol class="black-text">
-          <li><code>add(item)</code>
-            <h5 class="grey-text text-darken-1" style="line-height: 175%">Add an item to the end of the queue.</h5>
+          <li><code>insert(item)</code>
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">
+              This function inserts an item into the heap. In order to maintain completeness, we start at the bottom level
+              and find the first available spot from left to right. Then, while the new item's parent is greater/less than
+              (this depends on the type of heap) the new item, we swap the two. We continue doing this, gradually moving the new item
+              up the tree until we find the right spot for it.
+            </h5>
           </li>
-          <li><code>remove()</code>
-            <h5 class="grey-text text-darken-1" style="line-height: 175%">Remove the first (oldest) item in the queue.</h5>
-          </li>
-          <li><code>peek()</code>
-            <h5 class="grey-text text-darken-1" style="line-height: 175%">Return the first (oldest) item in the queue.</h5>
-          </li>
-          <li><code>isEmpty()</code>
-            <h5 class="grey-text text-darken-1" style="line-height: 175%">Return <code class="black-text">true</code> if the queue is empty.</h5>
+          <li><code>retrieve_min()</code> (<code>retrieve_max()</code> for a max-heap)
+            <h5 class="grey-text text-darken-1" style="line-height: 175%">
+              This function simply grabs the max or min item in the heap, which is always the root. To remove it, we first remove the root
+              and replace it with the bottom-most item. This would be the right-most node on the bottom level. Then we swap the root with its
+              smallest (or largest, depending on the type of heap) child, gradually moving it down the tree until the heap property is fulfilled again.
+            </h5>
           </li>
         </ol>
       </h5>
       <br>
       <h3>Examples</h4>
       <br>
-      <div class="row">
-        <div class="col s6">
-          <div class="col-content">
-            <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
-// C++
-#include &lt;iostream&gt;
-
-using namespace std;
-    
-class Queue {
-  private:
-    int queue[10];
-    int size = 0;
-    int first = 0;
-    int last = 0;
-    
-  public:
-    void add(int item) {
-      if (last == 10) {
-        cout << "Full queue!" << endl;
-      }
-      else {
-        this->queue[last] = item;
-        this->last += 1;
-        this->size += 1;
-      }
-    }
-    
-    void remove() {
-      if (first == last) {
-        cout << "Empty queue!" << endl;
-      }
-      else {
-        for (int i = 0; i < last - 1; i++) {
-          this->queue[i] = queue[i + 1];
-        }
-        this->last -= 1;
-        this->size -= 1;
-      }
-    }
-    
-    bool isEmpty() {
-      return this->size == 0;
-    }
-    
-    int peek() {
-      if (this->size == 0) {
-        cout << "Empty queue!" << endl;
-        return -1;
-      }
-      else {
-        return this->queue[first];
-      }
-    }
-};
-            </code></pre>
-          </div>
-        </div>
-        <div class="col s6">
-          <div class="col-content">
-            <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
-# Python
-class Queue:
-
-  def __init__(self):
-    self.queue = []
-
-  def isEmpty(self):
-    return len(self.queue) == 0
-
-  def add(self, data):
-    self.queue.append(data)
-
-  def remove(self):
-    if (not len(self.queue) == 0):
-      self.queue.pop(0)
-    else:
-      print("Empty queue!")
-  
-  def peek(self):
-    if (not len(self.queue) == 0):
-      return self.queue[0]
-    else:
-      print("Empty queue!")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            </code></pre>
-          </div>
-        </div>
-      </div>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        Please refer to the page on <a href="./trees.html">Trees</a> to see how to implement a binary tree. This page will only describe how
+        insert and retrieval works.
+      </h5>
     <br>
     <!-- Footer -->
     <h6 class="center grey-text text-darken-1">Developed by Logan Crocker</h6>
@@ -233,9 +134,9 @@ class Queue:
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <!-- materialize.js -->
-  <script type="text/javascript" src="./../../js/materialize.min.js"></script>
+  <script type="text/javascript" src="./../js/materialize.min.js"></script>
   <!-- nav.js -->
-  <script src="./../../js/nav.js"></script>
+  <script src="./../js/nav.js"></script>
   <!-- syntax highlighting -->
   <script src="./../../js/prism.js"></script>
 </body>
