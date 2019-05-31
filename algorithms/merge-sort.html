@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<head>
+  <title>
+    Interview Toolkit
+  </title>
+  <!-- Google Icon Font -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- materialize.css -->
+  <link type="text/css" rel="stylesheet" href="./../css/materialize.min.css"  media="screen,projection"/>
+  <!-- syntax highlighting -->
+  <link type="text/css" rel="stylesheet" href="./../css/prism.css">
+</head>
+<body class="grey lighten-5">
+  <div class="container">
+    <!-- Data structures dropdown -->
+    <ul id="data-structures-dropdown" class="dropdown-content">
+        <li><a class="blue-text text-darken-5" href="./../data-structures/linked-list.html">Linked Lists</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/trees.html">Trees</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/tries.html">Tries</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/graphs.html">Graphs</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/stacks.html">Stacks</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/queues.html">Queues</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/heaps.html">Heaps</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/vectors.html">Vectors</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/hash-tables.html">Hash tables</a></li>
+      </ul>
+      <!-- Algorithms dropdown -->
+      <ul id="algorithms-dropdown" class="dropdown-content">
+        <li><a class="blue-text text-darken-5" href="./../algorithms/bfs.html">BFS</a></li>
+        <li><a class="blue-text text-darken-5" href="./../algorithms/dfs.html">DFS</a></li>
+        <li><a class="blue-text text-darken-5" href="./../algorithms/binary-search.html">Binary Search</a></li>
+        <li><a class="blue-text text-darken-5" href="./../algorithms/merge-sort.html">Merge Sort</a></li>
+        <li><a class="blue-text text-darken-5" href="./../algorithms/quick-sort.html">Quick Sort</a></li>
+      </ul>
+      <!-- Concepts dropdown -->
+      <ul id="concepts-dropdown" class="dropdown-content ">
+        <li><a class="blue-text text-darken-5" href="#">Bit Manipulation</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Memory</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Recursion</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Dynamic Programming</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Big O</a></li>
+      </ul>
+      <!-- Navigation bar -->
+      <nav class="blue lighten-2">
+        <div class="nav-wrapper">
+          <a href="./../index.html" class="brand-logo" style="margin-left: 15px; font-size: 28px;">
+            Welcome to the Interview Toolkit.
+          </a>
+          <ul class="right hide-on-med-and-down">
+            <li>
+              <a class="dropdown-trigger" data-target="data-structures-dropdown" href="data-structures.html"
+                 style="font-size: 24px;">Data Structures</a>
+            </li>
+            <li class="active">
+              <a class="dropdown-trigger" data-target="algorithms-dropdown" href="#"
+                 style="font-size: 24px;">Algorithms</a>
+            </li>
+            <li>
+              <a class="dropdown-trigger"  data-target="concepts-dropdown" href="#"
+                 style="font-size: 24px;">Concepts</a>
+            </li>
+          </ul>
+         </div>
+      </nav>
+      <h2>Merge sort</h2>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        Merge sort is a type of sorting algorithm that uses the divide and conquer methodology. It has a time complexity of 
+        O(nlogn). It is one of the most popular sorting algorithms, in addition to <a href="./quick-sort.html">Quick sort</a>
+        and Radix sort.
+      </h5>
+      <br>
+      <h3>Implementation</h3>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        Merge sort is typically implemented recursively by repeatedly slicing the array in half and then merging the halves together
+        until the list is sorted. The <code class="black-text">merge()</code> function is where most of the work happens. It works
+        by copying the elements from the starting array into a helper array for the left and right halves. Then it copies the values
+        iterates through both halves and copies the values back into the target array in ascending order. At the end it copies 
+        any remaining values back into the target array from the left and right halves.
+      </h5>
+      <br>
+      <h3>Examples</h4>
+      <br>
+      <div class="row">
+        <div class="col s6">
+          <div class="col-content">
+            <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
+// C++
+void merge(int arr[], int left, int mid, int right) {
+  int i, j, k;
+  int n1 = mid - left + 1;
+  int n2 = right - mid;
+
+  int* leftHelper = new int[n1];
+  int* rightHelper = new int[n2];
+
+  for (i = 0; i < n1; ++i) {
+    leftHelper[i] = arr[left + i];
+  } 
+  for (j = 0; j < n1; ++j) {
+    rightHelper[j] = arr[mid + 1 + j];
+  } 
+
+  i = 0;
+  j = 0;
+  k = left;
+  while (i < n1 && j < n2) {
+    if (leftHelper[i] <= rightHelper[j]) {
+      arr[k] = leftHelper[i];
+      i++;
+    }
+    else {
+      arr[k] = rightHelper[j];
+      j++;
+    }
+    k++;
+  }
+  while (i < n1) {
+    arr[k] = leftHelper[i];
+    i++;
+    k++;
+  }
+  while (j < n2) {
+    arr[k] = rightHelper[j];
+    j++;
+    k++;
+  }
+}
+
+void mergeSort(int arr[], int left, int right) {
+
+  if (left < right) {
+    int mid = left + (right - left) / 2;
+
+    mergeSort(arr, left, mid);
+    mergeSort(arr, mid + 1, right);
+
+    merge(arr, left, mid, right);
+  }
+}
+            </code></pre>
+          </div>
+        </div>
+        <div class="col s6">
+          <div class="col-content">
+            <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
+# Python
+def mergeSort(arr):
+  if len(arr) > 1:
+    mid = len(arr) // 2
+
+    leftHelper = arr[:mid]
+    rightHelper = arr[mid:]
+
+    mergeSort(leftHelper)
+    mergeSort(rightHelper)
+
+    i = j = k = 0
+
+    while i < len(leftHelper) and j < len(rightHelper):
+      if leftHelper[i] < rightHelper[j]:
+        arr[k] = leftHelper[i]
+        i += 1
+
+      else:
+        arr[k] = rightHelper[j]
+        j += 1
+
+      k += 1
+
+    while i < len(leftHelper):
+      arr[k] = leftHelper[i]
+      i += 1
+      k += 1
+
+    while j < len(rightHelper):
+      arr[k] = rightHelper[j]
+      j += 1
+      k += 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </code></pre>
+          </div>
+        </div>
+      </div>
+    <!-- Footer -->
+    <h6 class="center grey-text text-darken-1">Developed by Logan Crocker</h6>
+    <div class="row">
+      <div class=" center col s1 offset-s5">
+        <a href="https://github.com/logancrocker/">Github</a>
+      </div>
+      <div class="col s1">
+        <a href="https://logancrocker.github.io/">Portfolio</a>
+      </div>
+    </div>
+    <div class="center">
+      <h6 class="grey-text text-darken-1">Many thanks and credit to Gayle Laakmann McDowell</h6>
+      <a class="center" href="http://www.crackingthecodinginterview.com/">Crack the Coding Interview</a>
+    </div>
+    <br>
+  </div>
+
+  <!-- JS imports -->
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <!-- materialize.js -->
+  <script type="text/javascript" src="./../js/materialize.min.js"></script>
+  <!-- nav.js -->
+  <script src="./../js/nav.js"></script>
+  <!-- syntax highlighting -->
+  <script src="./../js/prism.js"></script>
+</body>

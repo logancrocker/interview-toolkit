@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<head>
+  <title>
+    Interview Toolkit
+  </title>
+  <!-- Google Icon Font -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- materialize.css -->
+  <link type="text/css" rel="stylesheet" href="./../css/materialize.min.css"  media="screen,projection"/>
+  <!-- syntax highlighting -->
+  <link type="text/css" rel="stylesheet" href="./../css/prism.css">
+</head>
+<body class="grey lighten-5">
+  <div class="container">
+    <!-- Data structures dropdown -->
+    <ul id="data-structures-dropdown" class="dropdown-content">
+        <li><a class="blue-text text-darken-5" href="./../data-structures/linked-list.html">Linked Lists</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/trees.html">Trees</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/tries.html">Tries</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/graphs.html">Graphs</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/stacks.html">Stacks</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/queues.html">Queues</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/heaps.html">Heaps</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/vectors.html">Vectors</a></li>
+        <li><a class="blue-text text-darken-5" href="./../data-structures/hash-tables.html">Hash tables</a></li>
+      </ul>
+      <!-- Algorithms dropdown -->
+      <ul id="algorithms-dropdown" class="dropdown-content">
+        <li><a class="blue-text text-darken-5" href="./../algorithms/bfs.html">BFS</a></li>
+        <li><a class="blue-text text-darken-5" href="./../algorithms/dfs.html">DFS</a></li>
+        <li><a class="blue-text text-darken-5" href="./../algorithms/binary-search.html">Binary Search</a></li>
+        <li><a class="blue-text text-darken-5" href="./../algorithms/merge-sort.html">Merge Sort</a></li>
+        <li><a class="blue-text text-darken-5" href="./../algorithms/quick-sort.html">Quick Sort</a></li>
+      </ul>
+      <!-- Concepts dropdown -->
+      <ul id="concepts-dropdown" class="dropdown-content ">
+        <li><a class="blue-text text-darken-5" href="#">Bit Manipulation</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Memory</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Recursion</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Dynamic Programming</a></li>
+        <li><a class="blue-text text-darken-5" href="#">Big O</a></li>
+      </ul>
+      <!-- Navigation bar -->
+      <nav class="blue lighten-2">
+        <div class="nav-wrapper">
+          <a href="./../index.html" class="brand-logo" style="margin-left: 15px; font-size: 28px;">
+            Welcome to the Interview Toolkit.
+          </a>
+          <ul class="right hide-on-med-and-down">
+            <li>
+              <a class="dropdown-trigger" data-target="data-structures-dropdown" href="data-structures.html"
+                 style="font-size: 24px;">Data Structures</a>
+            </li>
+            <li class="active">
+              <a class="dropdown-trigger" data-target="algorithms-dropdown" href="#"
+                 style="font-size: 24px;">Algorithms</a>
+            </li>
+            <li>
+              <a class="dropdown-trigger"  data-target="concepts-dropdown" href="#"
+                 style="font-size: 24px;">Concepts</a>
+            </li>
+          </ul>
+         </div>
+      </nav>
+      <h2>Depth-First Search</h2>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        Depth-First Search is another graph traversal algorithm. It is much simpler to implement than <a href="./bfs.html">BFS</a>, so it is usually
+        the choice for when you need to reach every node in a <a href="./../data-structures/graphs.html">Graph</a>. Although it can be used to find 
+        a shortest path, it is typically not preferred, since it will usually be less efficient. This is due to the fact that traverses all the way
+        down a path before moving onto the next neighbor for a given node.
+      </h5>
+      <br>
+      <h3>Implementation</h3>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        DFS is typically implemented recursively, resulting in a beautifully simple algorithm. If the root is not null, mark it and visit it. Then
+        for each neighbor, make a recursive call on the neighbors which haven't been marked yet.
+      </h5>
+      <br>
+      <h3>Examples</h4>
+      <br>
+      <h5 class="grey-text text-darken-1" style="line-height: 175%">
+        The following code performs a DFS using the undirected graph shown on the <a href="./../data-structures/graphs.html">Graphs</a> page of this website,
+        starting at node 1.
+      </h5>
+      <br>
+      <div class="row">
+        <div class="col s6">
+          <div class="col-content">
+            <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-cpp">
+// C++
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+    
+using namespace std;
+    
+class Node {
+  private:
+    char label;
+    bool marked;
+    vector<Node*> neighbors;
+  public:
+    Node(char label) {
+      this->label = label;
+      this->marked = false;
+    }
+    vector<Node*> get_neighbors() {
+      return this->neighbors;
+    }
+    void add_neighbor(Node* n) {
+      this->neighbors.push_back(n);
+    }
+    void visit() {
+      cout << this->label << endl;
+    }
+    void mark() {
+      this->marked = true;
+    }
+    bool isMarked() {
+      return this->marked;
+    }
+};
+    
+class Graph {
+  private:
+    vector<Node*> nodes;
+  public:
+    Graph(vector<Node*> nodes) {
+      this->nodes = nodes;
+    }
+    vector<Node*> get_nodes() {
+      return this->nodes;
+    }
+};
+    
+void depthFirstSearch(Node* root) {
+  if (root == NULL) { return; }
+  root->visit();
+  root->mark();
+  for (Node* n : root->get_neighbors()) {
+    if (!n->isMarked()) {
+      depthFirstSearch(n);
+    }
+  }
+}
+    
+int main() {
+    
+  // declare nodes
+  Node* n1 = new Node('1');
+  Node* n2 = new Node('2');
+  Node* n3 = new Node('3');
+  Node* n4 = new Node('4');
+  Node* n5 = new Node('5');
+    
+  // add neighbors
+  n1->add_neighbor(n4);
+    
+  n2->add_neighbor(n4);
+  n2->add_neighbor(n5);
+    
+  n3->add_neighbor(n5);
+    
+  n4->add_neighbor(n1);
+  n4->add_neighbor(n2);
+  n4->add_neighbor(n5);
+    
+  n5->add_neighbor(n3);
+  n5->add_neighbor(n2);
+  n5->add_neighbor(n4);
+    
+  // create list of nodes
+  vector<Node*> nodes;
+  nodes.push_back(n1);
+  nodes.push_back(n2);
+  nodes.push_back(n3);
+  nodes.push_back(n4);
+  nodes.push_back(n5);
+    
+  // init graph
+  Graph* g = new Graph(nodes);
+    
+  Node* root = g->get_nodes()[0];
+  depthFirstSearch(root);
+    
+  return 0;
+}
+            </code></pre>
+          </div>
+        </div>
+        <div class="col s6">
+          <div class="col-content">
+            <pre style="border: 1px solid grey; border-radius: 10px;"><code class="language-py">
+# Python
+class Node:
+  def __init__(self, label):
+    self.label = label
+    self.marked = False
+    self.neighbors = []
+
+  def add_neighbor(self, node):
+    self.neighbors.append(node)
+
+  def visit(self):
+    print(self.label)
+
+  def mark(self):
+    self.marked = True
+
+class Graph:
+  def __init__(self, nodes):
+    self.nodes = nodes
+
+def depthFirstSearch(root):
+  if (root):
+    root.visit()
+    root.mark()
+    for n in root.neighbors:
+      if (not n.marked):
+        depthFirstSearch(n)
+  else:
+    return
+
+if __name__ == "__main__":
+  # declare nodes
+  n1 = Node('1')
+  n2 = Node('2')
+  n3 = Node('3')
+  n4 = Node('4')
+  n5 = Node('5')
+
+  # add neighbors
+  n1.add_neighbor(n4)
+
+  n2.add_neighbor(n4)
+  n2.add_neighbor(n5)
+
+  n3.add_neighbor(n5)
+
+  n4.add_neighbor(n1)
+  n4.add_neighbor(n2)
+  n4.add_neighbor(n5)
+
+  n5.add_neighbor(n3)
+  n5.add_neighbor(n2)
+  n5.add_neighbor(n4)
+
+  # create list of nodes
+  nodes = []
+  nodes.append(n1)
+  nodes.append(n2)
+  nodes.append(n3)
+  nodes.append(n4)
+  nodes.append(n5)
+
+  # init graph
+  g = Graph(nodes)
+  root = g.nodes[0]
+
+  depthFirstSearch(root)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </code></pre>
+          </div>
+        </div>
+      </div>
+    <!-- Footer -->
+    <h6 class="center grey-text text-darken-1">Developed by Logan Crocker</h6>
+    <div class="row">
+      <div class=" center col s1 offset-s5">
+        <a href="https://github.com/logancrocker/">Github</a>
+      </div>
+      <div class="col s1">
+        <a href="https://logancrocker.github.io/">Portfolio</a>
+      </div>
+    </div>
+    <div class="center">
+      <h6 class="grey-text text-darken-1">Many thanks and credit to Gayle Laakmann McDowell</h6>
+      <a class="center" href="http://www.crackingthecodinginterview.com/">Crack the Coding Interview</a>
+    </div>
+    <br>
+  </div>
+
+  <!-- JS imports -->
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <!-- materialize.js -->
+  <script type="text/javascript" src="./../js/materialize.min.js"></script>
+  <!-- nav.js -->
+  <script src="./../js/nav.js"></script>
+  <!-- syntax highlighting -->
+  <script src="./../js/prism.js"></script>
+</body>
